@@ -6,3 +6,5 @@ This is a slightly updated version of the V2 Autodesk.AutoCAD.js file provided b
 Their old one wasn't working with any examples anymore.
 
 To run any example you need to download and modify the LoadIntoAutoCAD.js file and change the html file path string to your local html file to load.  Then you'll want to webload the LoadIntoAutoCAD.js file.
+
+I'm currently testing this with AutoDesk AutoCAD 2019 / AutoDesk AutoCAD Plant3D 2019
