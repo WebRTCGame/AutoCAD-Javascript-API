@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+		<script type="text/javascript" src="C:\Temp\Autodesk.AutoCAD.js"></script>
+        <title>Sample App</title>
+		<script>
+			
+		function capturePreview()
+		{		
+				Acad.Application.activedocument.capturePreview(200,200)
+.then(success,error);
+		}
+		function success(encodedbmp)
+		{
+			var container = document.getElementById('imageContainer');
+            var img = document.createElement('img');
+            var src = "data:image/bmp;base64," + encodedbmp;
+            img.setAttribute('src', src);
+            img.setAttribute('id', 'previewImg');
+            container.appendChild(img);
+		}
+
+		function error()
+		{
+			alert("error");
+		}
+
+		</script>
+    </head>
+    <body>
+		<input type='button' onclick='window.location.reload()' 
+value='Reload' style="display:inline"/>
+        <h1>Sample App</h1>
+		<input type='button' onclick='capturePreview()' 
+value="capturePreview"/>
+		<div id='imageContainer'></div>
+        <p>
+        </p>
+    </body>
+</html>
