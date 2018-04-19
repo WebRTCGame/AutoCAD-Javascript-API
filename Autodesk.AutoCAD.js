@@ -380,12 +380,12 @@ var Autodesk;
             Promise.prototype.then = function (success, error) {
                 if (typeof (success) == 'function')
                     this.success = success;
-else
+                else
                     throw TypeError('success function pointer should be of type function');
 
                 if (typeof (error) == 'function')
                     this.error = error;
-else
+                else
                     throw TypeError('error function pointer should be of type function');
             };
             return Promise;
@@ -424,12 +424,12 @@ var Autodesk;
             function Point2d(x, y) {
                 if (typeof x == 'number')
                     this.x = x;
-else
+                else
                     throw TypeError("x is not number");
 
                 if (typeof y == 'number')
                     this.y = y;
-else
+                else
                     throw TypeError("y is not number");
             }
             return Point2d;
@@ -446,17 +446,17 @@ else
             function Point3d(x, y, z) {
                 if (typeof x == 'number')
                     this.x = x;
-else
+                else
                     throw TypeError("x is not number");
 
                 if (typeof y == 'number')
                     this.y = y;
-else
+                else
                     throw TypeError("y is not number");
 
                 if (typeof z == 'number')
                     this.z = z;
-else
+                else
                     throw TypeError("z is not number");
             }
             return Point3d;
@@ -474,12 +474,12 @@ else
             function Vector2d(x, y) {
                 if (typeof x == 'number')
                     this.x = x;
-else
+                else
                     throw TypeError("x is not number");
 
                 if (typeof y == 'number')
                     this.y = y;
-else
+                else
                     throw TypeError("y is not number");
             }
             return Vector2d;
@@ -497,17 +497,17 @@ else
             function Vector3d(x, y, z) {
                 if (typeof x == 'number')
                     this.x = x;
-else
+                else
                     throw TypeError("x is not number");
 
                 if (typeof y == 'number')
                     this.y = y;
-else
+                else
                     throw TypeError("y is not number");
 
                 if (typeof z == 'number')
                     this.z = z;
-else
+                else
                     throw TypeError("z is not number");
             }
             return Vector3d;
@@ -525,12 +525,12 @@ else
             function Rectangle2d(lowerLeft, upperRight) {
                 if (lowerLeft instanceof Acad.Point2d)
                     this.lowerLeft = lowerLeft;
-else
+                else
                     throw TypeError("lowerLeft should be of Acad.Point2d type.");
 
                 if (upperRight instanceof Acad.Point2d)
                     this.upperRight = upperRight;
-else
+                else
                     throw TypeError("upperRight should be of Acad.Point2d type.");
             }
             return Rectangle2d;
@@ -550,12 +550,12 @@ else
             function Bounds3d(minPt3d, maxPt3d) {
                 if (minPt3d instanceof Acad.Point3d)
                     this.minPoint3d = minPt3d;
-else
+                else
                     throw TypeError("minPt3d should be of Acad.Point3d type.");
 
                 if (maxPt3d instanceof Acad.Point3d)
                     this.maxPoint3d = maxPt3d;
-else
+                else
                     throw TypeError("maxPt3d should be of Acad.Point3d type.");
             }
             return Bounds3d;
@@ -984,9 +984,9 @@ var Autodesk;
                 * Returns the object identifier. Read only property.
                 * @return id which is of string type
                 */
-                function () {
-                    return this.entityId;
-                },
+                    function () {
+                        return this.entityId;
+                    },
                 set: function (val) {
                     throw Error(" You are not allowed to set this property");
                 },
@@ -1177,7 +1177,7 @@ var Autodesk;
             function Menu(items) {
                 if (items instanceof Array)
                     this.items = items;
-else
+                else
                     throw new TypeError("items should be of Array type.");
             }
             return Menu;
@@ -1748,9 +1748,9 @@ var Autodesk;
                 * @Type boolean
                 *
                 */
-                function () {
-                    return this._useDefaultValue;
-                },
+                    function () {
+                        return this._useDefaultValue;
+                    },
                 set: function (x) {
                     this._useDefaultValue = x;
                 },
@@ -1782,9 +1782,9 @@ var Autodesk;
                 * The default value to be used when the user presses ENTER without any other input.
                 * @Type Integer
                 */
-                function () {
-                    return this._defaultValue;
-                },
+                    function () {
+                        return this._defaultValue;
+                    },
                 set: function (x) {
                     if (Acad.isInteger(x)) {
                         this._defaultValue = x;
@@ -1816,9 +1816,9 @@ var Autodesk;
                 * The default value to be used when the user presses ENTER without any other input.
                 * @Type Number
                 */
-                function () {
-                    return this._defaultValue;
-                },
+                    function () {
+                        return this._defaultValue;
+                    },
                 set: function (x) {
                     if (Acad.isNumber(x)) {
                         this._defaultValue = x;
@@ -1858,9 +1858,9 @@ var Autodesk;
                 * Gets or sets the base point to be used by the prompt.
                 * @Type Point3d
                 */
-                function () {
-                    return this._basePoint;
-                },
+                    function () {
+                        return this._basePoint;
+                    },
                 set: function (x) {
                     if (x instanceof Acad.Point3d) {
                         this._basePoint = x;
@@ -1877,9 +1877,9 @@ var Autodesk;
                 * The default value to be used when the user presses ENTER without any other input.
                 * @Type Number
                 */
-                function () {
-                    return this._defaultValue;
-                },
+                    function () {
+                        return this._defaultValue;
+                    },
                 set: function (x) {
                     if (Acad.isNumber(x)) {
                         this._defaultValue = x;
@@ -1957,9 +1957,9 @@ var Autodesk;
                 * The default value to be used when the user presses ENTER without any other input.
                 * @Type String
                 */
-                function () {
-                    return this._defaultValue;
-                },
+                    function () {
+                        return this._defaultValue;
+                    },
                 set: function (x) {
                     if (typeof (x) == 'string') {
                         this._defaultValue = x;
@@ -1996,9 +1996,9 @@ var Autodesk;
                 * Gets or sets the base point to be used by the prompt.
                 * @Type Point3d
                 */
-                function () {
-                    return this._basePoint;
-                },
+                    function () {
+                        return this._basePoint;
+                    },
                 set: function (point) {
                     if (point instanceof Acad.Point3d) {
                         this._basePoint = point;
@@ -2015,9 +2015,9 @@ var Autodesk;
                 * The default value to be used when the user presses ENTER without any other input.
                 * @Type Number
                 */
-                function () {
-                    return this._defaultValue;
-                },
+                    function () {
+                        return this._defaultValue;
+                    },
                 set: function (x) {
                     if (Acad.isNumber(x)) {
                         this._defaultValue = x;
@@ -2071,9 +2071,9 @@ var Autodesk;
                 * picked entity is not allowed for this selection.
                 * @Type String
                 */
-                function () {
-                    return this._rejectMessage;
-                },
+                    function () {
+                        return this._rejectMessage;
+                    },
                 set: function (x) {
                     if (typeof (x) == 'string') {
                         this._rejectMessage = x;
@@ -2091,9 +2091,9 @@ var Autodesk;
                 * @Type Array
                 * @Read-Only
                 */
-                function () {
-                    return this._allowedClasses;
-                },
+                    function () {
+                        return this._allowedClasses;
+                    },
                 set: function (x) {
                     throw Error('Please use addAllowedClass() function to modify it.');
                 },
@@ -2178,9 +2178,9 @@ var Autodesk;
                 * Gets or sets the value for a non-interactive pick point.
                 * @Type Point3d
                 */
-                function () {
-                    return this._nonInteractivePickPoint;
-                },
+                    function () {
+                        return this._nonInteractivePickPoint;
+                    },
                 set: function (point) {
                     if (point instanceof Acad.Point3d) {
                         this._nonInteractivePickPoint = point;
@@ -2214,9 +2214,9 @@ var Autodesk;
                 * Gets or sets the cursor to be associated with the prompt.
                 * @Type Acad.CursorType
                 */
-                function () {
-                    return this._specialCursorType;
-                },
+                    function () {
+                        return this._specialCursorType;
+                    },
                 set: function (x) {
                     var col = Acad.CursorType;
                     var isValid = false;
@@ -2242,13 +2242,13 @@ var Autodesk;
                 * The settings in effect at the present time for this particular jig.
                 * @Type Acad.UserInputControls
                 */
-                function () {
-                    return this._userInputControls;
-                },
+                    function () {
+                        return this._userInputControls;
+                    },
                 set: function (x) {
                     if (Acad.isInteger(x))
                         this._userInputControls = x;
-else
+                    else
                         throw new TypeError('Type of userInputControls should be Acad.UserInputControls.');
                 },
                 enumerable: true,
@@ -2263,13 +2263,13 @@ else
                 * @Type boolean
                 *
                 */
-                function () {
-                    return this._useDefaultValue;
-                },
+                    function () {
+                        return this._useDefaultValue;
+                    },
                 set: function (x) {
                     if (typeof (x) == 'boolean')
                         this._useDefaultValue = x;
-else
+                    else
                         throw new TypeError('Type of useDefaultValue should be boolean.');
                 },
                 enumerable: true,
@@ -2296,9 +2296,9 @@ else
                 * Gets or sets the base point to be used by the prompt.
                 * @Type Point3d
                 */
-                function () {
-                    return this._basePoint;
-                },
+                    function () {
+                        return this._basePoint;
+                    },
                 set: function (x) {
                     if (x instanceof Acad.Point3d) {
                         this._basePoint = x;
@@ -2316,13 +2316,13 @@ else
                 * Gets or sets whether the base point is to be used or not.
                 * @Type boolean
                 */
-                function () {
-                    return this._useBasePoint;
-                },
+                    function () {
+                        return this._useBasePoint;
+                    },
                 set: function (x) {
                     if (typeof (x) == 'boolean')
                         this._useBasePoint = x;
-else
+                    else
                         throw Error('Type of useBasePoint should be boolean.');
                 },
                 enumerable: true,
@@ -2349,9 +2349,9 @@ else
                 * Gets or sets default jig prompt distance options value.
                 * @Type Number
                 */
-                function () {
-                    return this._defaultValue;
-                },
+                    function () {
+                        return this._defaultValue;
+                    },
                 set: function (x) {
                     if (Acad.isNumber(x)) {
                         this._defaultValue = x;
@@ -2383,9 +2383,9 @@ else
                 * Returns the default jig prompt angle options value.
                 * @Type Number
                 */
-                function () {
-                    return this._defaultValue;
-                },
+                    function () {
+                        return this._defaultValue;
+                    },
                 set: function (x) {
                     if (Acad.isNumber(x)) {
                         this._defaultValue = x;
@@ -2404,9 +2404,9 @@ else
                 * @Read-Only
                 * @Type boolean
                 */
-                function () {
-                    return this._useBasePoint;
-                },
+                    function () {
+                        return this._useBasePoint;
+                    },
                 set: function (x) {
                     throw Error("useBasePoint is read-only property");
                 },
@@ -2433,9 +2433,9 @@ else
                 *  Returns the default value to be used for point option prompt.
                 * @Type Acad.Point3d
                 */
-                function () {
-                    return this._defaultValue;
-                },
+                    function () {
+                        return this._defaultValue;
+                    },
                 set: function (x) {
                     if (x instanceof Acad.Point3d) {
                         this._defaultValue = x;
@@ -2466,13 +2466,13 @@ else
                 * Returns the default value to be used for string option prompt.
                 * @Type String
                 */
-                function () {
-                    return this._defaultValue;
-                },
+                    function () {
+                        return this._defaultValue;
+                    },
                 set: function (x) {
                     if (typeof (x) == 'string')
                         this._defaultValue = x;
-else
+                    else
                         throw new TypeError('Default value should be String.');
                 },
                 enumerable: true,
@@ -2575,7 +2575,7 @@ var Autodesk;
                 if (retCode == Acad.PromptStatus.OK) {
                     if (point instanceof Acad.Point3d)
                         this.value = point;
-else
+                    else
                         throw new TypeError("Point should be of Point3d type.");
                 }
             }
@@ -2600,7 +2600,7 @@ else
                 this.objectId = objectId;
                 if (point instanceof Acad.Point3d)
                     this.pickedPoint = point;
-else
+                else
                     throw new TypeError("Point should be of Point3d type.");
             }
             return PromptEntityResult;
@@ -2633,7 +2633,7 @@ else
 
                 if (objectIds instanceof Array)
                     this.containers = objectIds;
-else
+                else
                     throw new TypeError("objectIds should be of Array type.");
             }
             return PromptNestedEntityResult;
@@ -2709,7 +2709,7 @@ var Autodesk;
                 _super.call(this, status);
                 if (objectIds instanceof Array)
                     this.value = objectIds;
-else
+                else
                     throw new TypeError("objectIds should be of Array type.");
             }
             return PromptSelectionResult;
@@ -2882,7 +2882,7 @@ var Autodesk;
 
                     strNewSysvarNames = strNewSysvarNames.substring(0, strNewSysvarNames.length - 1);
 
-                    try  {
+                    try {
                         addReactor(strNewSysvarNames);
                     } catch (e) {
                         throw Error("Error occured during registering sysvars");
@@ -2926,7 +2926,7 @@ var Autodesk;
                             sysvarToCallback[sysvarName].splice(index, 1);
 
                             if (sysvarToCallback[sysvarName].length == 0) {
-                                try  {
+                                try {
                                     removeReactor(sysvarName);
                                     delete sysvarToCallback[sysvarName];
                                 } catch (e) {
@@ -2991,9 +2991,9 @@ var Autodesk;
                 * @throws Error
                 *
                 */
-                function () {
-                    return this._name;
-                },
+                    function () {
+                        return this._name;
+                    },
                 set: function (x) {
                     throw Error("name is read-only property");
                 },
@@ -3009,9 +3009,9 @@ var Autodesk;
                 * @throws Error
                 *
                 */
-                function () {
-                    return this._valueType;
-                },
+                    function () {
+                        return this._valueType;
+                    },
                 set: function (x) {
                     throw Error("valueType is read-only property");
                 },
@@ -3027,9 +3027,9 @@ var Autodesk;
                 * @throws Error
                 *
                 */
-                function () {
-                    return this._minimum;
-                },
+                    function () {
+                        return this._minimum;
+                    },
                 set: function (x) {
                     throw Error("minimum is read-only property");
                 },
@@ -3045,9 +3045,9 @@ var Autodesk;
                 * @throws Error
                 *
                 */
-                function () {
-                    return this._maximum;
-                },
+                    function () {
+                        return this._maximum;
+                    },
                 set: function (x) {
                     throw Error("maximum is read-only property");
                 },
@@ -3063,11 +3063,11 @@ var Autodesk;
                 * @throws Error
                 *
                 */
-                function () {
-                    var jsonObj = Acad.SysVarCollectionInterop.getSysVar(this._name);
-                    this._isActive = jsonObj.isActive;
-                    return this._isActive;
-                },
+                    function () {
+                        var jsonObj = Acad.SysVarCollectionInterop.getSysVar(this._name);
+                        this._isActive = jsonObj.isActive;
+                        return this._isActive;
+                    },
                 set: function (x) {
                     throw Error("isActive is read-only property");
                 },
@@ -3083,37 +3083,37 @@ var Autodesk;
                 * @throws TypeError
                 *
                 */
-                function () {
-                    var jsonObj = Acad.SysVarCollectionInterop.getSysVar(this._name);
-                    switch (this._valueType) {
-                        case Acad.ResultValueType.RTPOINT:
-                            var pt = JSON.parse(jsonObj.value);
-                            this._value = new Acad.Point2d(pt.x, pt.y);
-                            break;
-                        case Acad.ResultValueType.RT3DPOINT:
-                            var pt = JSON.parse(jsonObj.value);
-                            this._value = new Acad.Point3d(pt.x, pt.y, pt.z);
-                            break;
-                        case Acad.ResultValueType.RTANG:
-                        case Acad.ResultValueType.RTLONG:
-                        case Acad.ResultValueType.RTORINT:
-                        case Acad.ResultValueType.RTREAL:
-                        case Acad.ResultValueType.RTSHORT:
-                            this._value = JSON.parse(jsonObj.value);
-                            break;
-                        default:
-                            this._value = jsonObj.value;
-                            break;
-                    }
-                    return this._value;
-                },
+                    function () {
+                        var jsonObj = Acad.SysVarCollectionInterop.getSysVar(this._name);
+                        switch (this._valueType) {
+                            case Acad.ResultValueType.RTPOINT:
+                                var pt = JSON.parse(jsonObj.value);
+                                this._value = new Acad.Point2d(pt.x, pt.y);
+                                break;
+                            case Acad.ResultValueType.RT3DPOINT:
+                                var pt = JSON.parse(jsonObj.value);
+                                this._value = new Acad.Point3d(pt.x, pt.y, pt.z);
+                                break;
+                            case Acad.ResultValueType.RTANG:
+                            case Acad.ResultValueType.RTLONG:
+                            case Acad.ResultValueType.RTORINT:
+                            case Acad.ResultValueType.RTREAL:
+                            case Acad.ResultValueType.RTSHORT:
+                                this._value = JSON.parse(jsonObj.value);
+                                break;
+                            default:
+                                this._value = jsonObj.value;
+                                break;
+                        }
+                        return this._value;
+                    },
                 set: function (valToSet) {
                     this.checkIfValidValue(valToSet);
 
                     var strVal;
                     if (typeof valToSet != "string")
                         strVal = JSON.stringify(valToSet);
-else
+                    else
                         strVal = valToSet;
 
                     var typedValueInterop = {
@@ -3170,7 +3170,7 @@ else
                 var strVal;
                 if (typeof sValue != "string")
                     strVal = JSON.stringify(sValue);
-else
+                else
                     strVal = sValue;
 
                 var typedValueInterop = {
@@ -3247,9 +3247,9 @@ var Autodesk;
                 * @Read-Only
                 * @Type Boolean
                 */
-                function () {
-                    return this._onUpdate;
-                },
+                    function () {
+                        return this._onUpdate;
+                    },
                 set: function (val) {
                     throw Error("onUpdate is read-only property");
                 },
@@ -3263,9 +3263,9 @@ var Autodesk;
                 * @Read-Only
                 * @Type Boolean
                 */
-                function () {
-                    return this._jigOptions;
-                },
+                    function () {
+                        return this._jigOptions;
+                    },
                 set: function (val) {
                     throw Error("jigOptions is read-only property");
                 },
@@ -3375,7 +3375,7 @@ var Autodesk;
                         if (obj.retCode !== Acad.ErrorStatus.eJsOk) {
                             if (obj.retErrorString == undefined)
                                 promise.error(obj.retCode);
-else
+                            else
                                 promise.error(obj.retCode, obj.retErrorString);
                             return;
                         }
@@ -3390,7 +3390,7 @@ else
                         delete DataItemCollectionManager.dataItemCollectionSet[colName];
                         if (retErrorString == undefined)
                             promise.error(retCode);
-else
+                        else
                             promise.error(retCode, retErrorString);
                     });
                 } else {
@@ -3939,7 +3939,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 };
@@ -4508,8 +4508,8 @@ var Autodesk;
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -4525,7 +4525,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -4544,8 +4544,8 @@ else
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -4561,7 +4561,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -4580,8 +4580,8 @@ else
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -4597,7 +4597,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -4616,8 +4616,8 @@ else
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -4633,7 +4633,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -4652,8 +4652,8 @@ else
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -4669,7 +4669,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -4805,8 +4805,8 @@ var Autodesk;
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -4822,7 +4822,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -4841,8 +4841,8 @@ else
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -4858,7 +4858,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -4877,8 +4877,8 @@ else
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -4894,7 +4894,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -4913,8 +4913,8 @@ else
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -4930,7 +4930,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -4949,8 +4949,8 @@ else
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -4966,7 +4966,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -4985,8 +4985,8 @@ else
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -5002,7 +5002,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -5021,8 +5021,8 @@ else
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -5038,7 +5038,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -5057,8 +5057,8 @@ else
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -5074,7 +5074,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -5137,8 +5137,8 @@ else
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -5154,7 +5154,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -5727,8 +5727,8 @@ var Autodesk;
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -5744,7 +5744,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -6105,8 +6105,8 @@ var Autodesk;
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -6122,7 +6122,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -6141,8 +6141,8 @@ else
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -6158,7 +6158,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -6177,8 +6177,8 @@ else
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -6194,7 +6194,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -6213,8 +6213,8 @@ else
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -6230,7 +6230,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -6249,8 +6249,8 @@ else
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -6266,7 +6266,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -6285,8 +6285,8 @@ else
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -6302,7 +6302,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -6321,8 +6321,8 @@ else
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -6338,7 +6338,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -6357,8 +6357,8 @@ else
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -6374,7 +6374,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -6393,8 +6393,8 @@ else
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -6410,7 +6410,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -6429,8 +6429,8 @@ else
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -6446,7 +6446,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -6465,8 +6465,8 @@ else
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -6482,7 +6482,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -6501,8 +6501,8 @@ else
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -6518,7 +6518,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -6537,8 +6537,8 @@ else
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -6554,7 +6554,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -6573,8 +6573,8 @@ else
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -6590,7 +6590,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -6609,8 +6609,8 @@ else
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -6626,7 +6626,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -6645,8 +6645,8 @@ else
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -6662,7 +6662,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -6681,8 +6681,8 @@ else
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -6698,7 +6698,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -6766,8 +6766,8 @@ var Autodesk;
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -6783,7 +6783,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -6871,8 +6871,8 @@ var Autodesk;
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -6888,7 +6888,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -6907,8 +6907,8 @@ else
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -6924,7 +6924,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -6943,8 +6943,8 @@ else
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -6960,7 +6960,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -6979,8 +6979,8 @@ else
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -6996,7 +6996,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -7015,8 +7015,8 @@ else
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -7032,7 +7032,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -7051,8 +7051,8 @@ else
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -7068,7 +7068,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -7109,8 +7109,8 @@ else
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -7126,7 +7126,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -7325,8 +7325,8 @@ var Autodesk;
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -7342,7 +7342,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -7361,8 +7361,8 @@ else
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -7378,7 +7378,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -7397,8 +7397,8 @@ else
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -7414,7 +7414,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -7482,8 +7482,8 @@ var Autodesk;
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -7499,7 +7499,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -7518,8 +7518,8 @@ else
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -7535,7 +7535,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -7554,8 +7554,8 @@ else
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -7571,7 +7571,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -7590,8 +7590,8 @@ else
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -7607,7 +7607,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -7648,8 +7648,8 @@ else
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -7665,7 +7665,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -7684,8 +7684,8 @@ else
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -7701,7 +7701,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -7720,8 +7720,8 @@ else
                             promise.success(resObj.retValue);
                         } else {
                             if (resObj.hasOwnProperty("retValue"))
-                                promise.success(JSON.parse(resObj.retValue));
-else
+                                promise.success(resObj.retValue);
+                            else
                                 promise.success(resObj);
                         }
                     }
@@ -7737,7 +7737,7 @@ else
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-else
+                        else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
