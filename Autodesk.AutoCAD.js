@@ -1,4 +1,3 @@
-﻿console.log("Loaded Autodesk.AutoCAD.js");
 var Autodesk;
 (function (Autodesk) {
     //
@@ -381,12 +380,12 @@ var Autodesk;
             Promise.prototype.then = function (success, error) {
                 if (typeof (success) == 'function')
                     this.success = success;
-                else
+else
                     throw TypeError('success function pointer should be of type function');
 
                 if (typeof (error) == 'function')
                     this.error = error;
-                else
+else
                     throw TypeError('error function pointer should be of type function');
             };
             return Promise;
@@ -425,12 +424,12 @@ var Autodesk;
             function Point2d(x, y) {
                 if (typeof x == 'number')
                     this.x = x;
-                else
+else
                     throw TypeError("x is not number");
 
                 if (typeof y == 'number')
                     this.y = y;
-                else
+else
                     throw TypeError("y is not number");
             }
             return Point2d;
@@ -447,17 +446,17 @@ var Autodesk;
             function Point3d(x, y, z) {
                 if (typeof x == 'number')
                     this.x = x;
-                else
+else
                     throw TypeError("x is not number");
 
                 if (typeof y == 'number')
                     this.y = y;
-                else
+else
                     throw TypeError("y is not number");
 
                 if (typeof z == 'number')
                     this.z = z;
-                else
+else
                     throw TypeError("z is not number");
             }
             return Point3d;
@@ -475,12 +474,12 @@ var Autodesk;
             function Vector2d(x, y) {
                 if (typeof x == 'number')
                     this.x = x;
-                else
+else
                     throw TypeError("x is not number");
 
                 if (typeof y == 'number')
                     this.y = y;
-                else
+else
                     throw TypeError("y is not number");
             }
             return Vector2d;
@@ -498,17 +497,17 @@ var Autodesk;
             function Vector3d(x, y, z) {
                 if (typeof x == 'number')
                     this.x = x;
-                else
+else
                     throw TypeError("x is not number");
 
                 if (typeof y == 'number')
                     this.y = y;
-                else
+else
                     throw TypeError("y is not number");
 
                 if (typeof z == 'number')
                     this.z = z;
-                else
+else
                     throw TypeError("z is not number");
             }
             return Vector3d;
@@ -526,12 +525,12 @@ var Autodesk;
             function Rectangle2d(lowerLeft, upperRight) {
                 if (lowerLeft instanceof Acad.Point2d)
                     this.lowerLeft = lowerLeft;
-                else
+else
                     throw TypeError("lowerLeft should be of Acad.Point2d type.");
 
                 if (upperRight instanceof Acad.Point2d)
                     this.upperRight = upperRight;
-                else
+else
                     throw TypeError("upperRight should be of Acad.Point2d type.");
             }
             return Rectangle2d;
@@ -551,12 +550,12 @@ var Autodesk;
             function Bounds3d(minPt3d, maxPt3d) {
                 if (minPt3d instanceof Acad.Point3d)
                     this.minPoint3d = minPt3d;
-                else
+else
                     throw TypeError("minPt3d should be of Acad.Point3d type.");
 
                 if (maxPt3d instanceof Acad.Point3d)
                     this.maxPoint3d = maxPt3d;
-                else
+else
                     throw TypeError("maxPt3d should be of Acad.Point3d type.");
             }
             return Bounds3d;
@@ -985,9 +984,9 @@ var Autodesk;
                 * Returns the object identifier. Read only property.
                 * @return id which is of string type
                 */
-                    function () {
-                        return this.entityId;
-                    },
+                function () {
+                    return this.entityId;
+                },
                 set: function (val) {
                     throw Error(" You are not allowed to set this property");
                 },
@@ -1147,6 +1146,44 @@ var Autodesk;
         })();
         AutoCAD.EventObject = EventObject;
 
+        var MenuItem = (function () {
+            function MenuItem(text, id, isChecked, isEnabled, items) {
+                this.text = text;
+                this.id = id || 0;
+                this.isChecked = isChecked || false;
+                this.isEnabled = isEnabled || true;
+                this.items = items || null;
+
+                if (typeof this.id != 'number')
+                    throw TypeError("id is not number");
+
+                if (typeof this.text != 'string')
+                    throw TypeError("text is not string");
+
+                if (typeof this.isChecked != 'boolean')
+                    throw TypeError("isChecked is not boolean");
+
+                if (typeof this.isEnabled != 'boolean')
+                    throw TypeError("isEnabled is not boolean");
+
+                if (this.items && !(this.items instanceof Array))
+                    throw new TypeError("items should be of Array type.");
+            }
+            return MenuItem;
+        })();
+        AutoCAD.MenuItem = MenuItem;
+
+        var Menu = (function () {
+            function Menu(items) {
+                if (items instanceof Array)
+                    this.items = items;
+else
+                    throw new TypeError("items should be of Array type.");
+            }
+            return Menu;
+        })();
+        AutoCAD.Menu = Menu;
+
         /**
         * @class Acad.Application, its a singleton. The class
         * provides services for accessing the active document object.
@@ -1225,6 +1262,16 @@ var Autodesk;
                 Acad.ApplicationInterop.addPalette(strPaletteName, uriOfHtmlPage);
             }
             Application.addPalette = addPalette;
+
+            function displayContextMenu(x, y, menu) {
+                if (menu.items.length <= 0) {
+                    throw TypeError('Menu items are empty');
+                }
+
+                return AutoCAD.ApplicationInterop.displayContextMenu(x, y, menu);
+            }
+            Application.displayContextMenu = displayContextMenu;
+            ;
 
             /**
             * This function is for internal use.
@@ -1701,9 +1748,9 @@ var Autodesk;
                 * @Type boolean
                 *
                 */
-                    function () {
-                        return this._useDefaultValue;
-                    },
+                function () {
+                    return this._useDefaultValue;
+                },
                 set: function (x) {
                     this._useDefaultValue = x;
                 },
@@ -1735,9 +1782,9 @@ var Autodesk;
                 * The default value to be used when the user presses ENTER without any other input.
                 * @Type Integer
                 */
-                    function () {
-                        return this._defaultValue;
-                    },
+                function () {
+                    return this._defaultValue;
+                },
                 set: function (x) {
                     if (Acad.isInteger(x)) {
                         this._defaultValue = x;
@@ -1769,9 +1816,9 @@ var Autodesk;
                 * The default value to be used when the user presses ENTER without any other input.
                 * @Type Number
                 */
-                    function () {
-                        return this._defaultValue;
-                    },
+                function () {
+                    return this._defaultValue;
+                },
                 set: function (x) {
                     if (Acad.isNumber(x)) {
                         this._defaultValue = x;
@@ -1811,9 +1858,9 @@ var Autodesk;
                 * Gets or sets the base point to be used by the prompt.
                 * @Type Point3d
                 */
-                    function () {
-                        return this._basePoint;
-                    },
+                function () {
+                    return this._basePoint;
+                },
                 set: function (x) {
                     if (x instanceof Acad.Point3d) {
                         this._basePoint = x;
@@ -1830,9 +1877,9 @@ var Autodesk;
                 * The default value to be used when the user presses ENTER without any other input.
                 * @Type Number
                 */
-                    function () {
-                        return this._defaultValue;
-                    },
+                function () {
+                    return this._defaultValue;
+                },
                 set: function (x) {
                     if (Acad.isNumber(x)) {
                         this._defaultValue = x;
@@ -1910,9 +1957,9 @@ var Autodesk;
                 * The default value to be used when the user presses ENTER without any other input.
                 * @Type String
                 */
-                    function () {
-                        return this._defaultValue;
-                    },
+                function () {
+                    return this._defaultValue;
+                },
                 set: function (x) {
                     if (typeof (x) == 'string') {
                         this._defaultValue = x;
@@ -1949,9 +1996,9 @@ var Autodesk;
                 * Gets or sets the base point to be used by the prompt.
                 * @Type Point3d
                 */
-                    function () {
-                        return this._basePoint;
-                    },
+                function () {
+                    return this._basePoint;
+                },
                 set: function (point) {
                     if (point instanceof Acad.Point3d) {
                         this._basePoint = point;
@@ -1968,9 +2015,9 @@ var Autodesk;
                 * The default value to be used when the user presses ENTER without any other input.
                 * @Type Number
                 */
-                    function () {
-                        return this._defaultValue;
-                    },
+                function () {
+                    return this._defaultValue;
+                },
                 set: function (x) {
                     if (Acad.isNumber(x)) {
                         this._defaultValue = x;
@@ -2024,9 +2071,9 @@ var Autodesk;
                 * picked entity is not allowed for this selection.
                 * @Type String
                 */
-                    function () {
-                        return this._rejectMessage;
-                    },
+                function () {
+                    return this._rejectMessage;
+                },
                 set: function (x) {
                     if (typeof (x) == 'string') {
                         this._rejectMessage = x;
@@ -2044,9 +2091,9 @@ var Autodesk;
                 * @Type Array
                 * @Read-Only
                 */
-                    function () {
-                        return this._allowedClasses;
-                    },
+                function () {
+                    return this._allowedClasses;
+                },
                 set: function (x) {
                     throw Error('Please use addAllowedClass() function to modify it.');
                 },
@@ -2131,9 +2178,9 @@ var Autodesk;
                 * Gets or sets the value for a non-interactive pick point.
                 * @Type Point3d
                 */
-                    function () {
-                        return this._nonInteractivePickPoint;
-                    },
+                function () {
+                    return this._nonInteractivePickPoint;
+                },
                 set: function (point) {
                     if (point instanceof Acad.Point3d) {
                         this._nonInteractivePickPoint = point;
@@ -2167,9 +2214,9 @@ var Autodesk;
                 * Gets or sets the cursor to be associated with the prompt.
                 * @Type Acad.CursorType
                 */
-                    function () {
-                        return this._specialCursorType;
-                    },
+                function () {
+                    return this._specialCursorType;
+                },
                 set: function (x) {
                     var col = Acad.CursorType;
                     var isValid = false;
@@ -2195,13 +2242,13 @@ var Autodesk;
                 * The settings in effect at the present time for this particular jig.
                 * @Type Acad.UserInputControls
                 */
-                    function () {
-                        return this._userInputControls;
-                    },
+                function () {
+                    return this._userInputControls;
+                },
                 set: function (x) {
                     if (Acad.isInteger(x))
                         this._userInputControls = x;
-                    else
+else
                         throw new TypeError('Type of userInputControls should be Acad.UserInputControls.');
                 },
                 enumerable: true,
@@ -2216,13 +2263,13 @@ var Autodesk;
                 * @Type boolean
                 *
                 */
-                    function () {
-                        return this._useDefaultValue;
-                    },
+                function () {
+                    return this._useDefaultValue;
+                },
                 set: function (x) {
                     if (typeof (x) == 'boolean')
                         this._useDefaultValue = x;
-                    else
+else
                         throw new TypeError('Type of useDefaultValue should be boolean.');
                 },
                 enumerable: true,
@@ -2249,9 +2296,9 @@ var Autodesk;
                 * Gets or sets the base point to be used by the prompt.
                 * @Type Point3d
                 */
-                    function () {
-                        return this._basePoint;
-                    },
+                function () {
+                    return this._basePoint;
+                },
                 set: function (x) {
                     if (x instanceof Acad.Point3d) {
                         this._basePoint = x;
@@ -2269,13 +2316,13 @@ var Autodesk;
                 * Gets or sets whether the base point is to be used or not.
                 * @Type boolean
                 */
-                    function () {
-                        return this._useBasePoint;
-                    },
+                function () {
+                    return this._useBasePoint;
+                },
                 set: function (x) {
                     if (typeof (x) == 'boolean')
                         this._useBasePoint = x;
-                    else
+else
                         throw Error('Type of useBasePoint should be boolean.');
                 },
                 enumerable: true,
@@ -2302,9 +2349,9 @@ var Autodesk;
                 * Gets or sets default jig prompt distance options value.
                 * @Type Number
                 */
-                    function () {
-                        return this._defaultValue;
-                    },
+                function () {
+                    return this._defaultValue;
+                },
                 set: function (x) {
                     if (Acad.isNumber(x)) {
                         this._defaultValue = x;
@@ -2336,9 +2383,9 @@ var Autodesk;
                 * Returns the default jig prompt angle options value.
                 * @Type Number
                 */
-                    function () {
-                        return this._defaultValue;
-                    },
+                function () {
+                    return this._defaultValue;
+                },
                 set: function (x) {
                     if (Acad.isNumber(x)) {
                         this._defaultValue = x;
@@ -2357,9 +2404,9 @@ var Autodesk;
                 * @Read-Only
                 * @Type boolean
                 */
-                    function () {
-                        return this._useBasePoint;
-                    },
+                function () {
+                    return this._useBasePoint;
+                },
                 set: function (x) {
                     throw Error("useBasePoint is read-only property");
                 },
@@ -2386,9 +2433,9 @@ var Autodesk;
                 *  Returns the default value to be used for point option prompt.
                 * @Type Acad.Point3d
                 */
-                    function () {
-                        return this._defaultValue;
-                    },
+                function () {
+                    return this._defaultValue;
+                },
                 set: function (x) {
                     if (x instanceof Acad.Point3d) {
                         this._defaultValue = x;
@@ -2419,13 +2466,13 @@ var Autodesk;
                 * Returns the default value to be used for string option prompt.
                 * @Type String
                 */
-                    function () {
-                        return this._defaultValue;
-                    },
+                function () {
+                    return this._defaultValue;
+                },
                 set: function (x) {
                     if (typeof (x) == 'string')
                         this._defaultValue = x;
-                    else
+else
                         throw new TypeError('Default value should be String.');
                 },
                 enumerable: true,
@@ -2528,7 +2575,7 @@ var Autodesk;
                 if (retCode == Acad.PromptStatus.OK) {
                     if (point instanceof Acad.Point3d)
                         this.value = point;
-                    else
+else
                         throw new TypeError("Point should be of Point3d type.");
                 }
             }
@@ -2553,7 +2600,7 @@ var Autodesk;
                 this.objectId = objectId;
                 if (point instanceof Acad.Point3d)
                     this.pickedPoint = point;
-                else
+else
                     throw new TypeError("Point should be of Point3d type.");
             }
             return PromptEntityResult;
@@ -2586,7 +2633,7 @@ var Autodesk;
 
                 if (objectIds instanceof Array)
                     this.containers = objectIds;
-                else
+else
                     throw new TypeError("objectIds should be of Array type.");
             }
             return PromptNestedEntityResult;
@@ -2662,7 +2709,7 @@ var Autodesk;
                 _super.call(this, status);
                 if (objectIds instanceof Array)
                     this.value = objectIds;
-                else
+else
                     throw new TypeError("objectIds should be of Array type.");
             }
             return PromptSelectionResult;
@@ -2835,7 +2882,7 @@ var Autodesk;
 
                     strNewSysvarNames = strNewSysvarNames.substring(0, strNewSysvarNames.length - 1);
 
-                    try {
+                    try  {
                         addReactor(strNewSysvarNames);
                     } catch (e) {
                         throw Error("Error occured during registering sysvars");
@@ -2879,7 +2926,7 @@ var Autodesk;
                             sysvarToCallback[sysvarName].splice(index, 1);
 
                             if (sysvarToCallback[sysvarName].length == 0) {
-                                try {
+                                try  {
                                     removeReactor(sysvarName);
                                     delete sysvarToCallback[sysvarName];
                                 } catch (e) {
@@ -2944,9 +2991,9 @@ var Autodesk;
                 * @throws Error
                 *
                 */
-                    function () {
-                        return this._name;
-                    },
+                function () {
+                    return this._name;
+                },
                 set: function (x) {
                     throw Error("name is read-only property");
                 },
@@ -2962,9 +3009,9 @@ var Autodesk;
                 * @throws Error
                 *
                 */
-                    function () {
-                        return this._valueType;
-                    },
+                function () {
+                    return this._valueType;
+                },
                 set: function (x) {
                     throw Error("valueType is read-only property");
                 },
@@ -2980,9 +3027,9 @@ var Autodesk;
                 * @throws Error
                 *
                 */
-                    function () {
-                        return this._minimum;
-                    },
+                function () {
+                    return this._minimum;
+                },
                 set: function (x) {
                     throw Error("minimum is read-only property");
                 },
@@ -2998,9 +3045,9 @@ var Autodesk;
                 * @throws Error
                 *
                 */
-                    function () {
-                        return this._maximum;
-                    },
+                function () {
+                    return this._maximum;
+                },
                 set: function (x) {
                     throw Error("maximum is read-only property");
                 },
@@ -3016,11 +3063,11 @@ var Autodesk;
                 * @throws Error
                 *
                 */
-                    function () {
-                        var jsonObj = Acad.SysVarCollectionInterop.getSysVar(this._name);
-                        this._isActive = jsonObj.isActive;
-                        return this._isActive;
-                    },
+                function () {
+                    var jsonObj = Acad.SysVarCollectionInterop.getSysVar(this._name);
+                    this._isActive = jsonObj.isActive;
+                    return this._isActive;
+                },
                 set: function (x) {
                     throw Error("isActive is read-only property");
                 },
@@ -3036,37 +3083,37 @@ var Autodesk;
                 * @throws TypeError
                 *
                 */
-                    function () {
-                        var jsonObj = Acad.SysVarCollectionInterop.getSysVar(this._name);
-                        switch (this._valueType) {
-                            case Acad.ResultValueType.RTPOINT:
-                                var pt = JSON.parse(jsonObj.value);
-                                this._value = new Acad.Point2d(pt.x, pt.y);
-                                break;
-                            case Acad.ResultValueType.RT3DPOINT:
-                                var pt = JSON.parse(jsonObj.value);
-                                this._value = new Acad.Point3d(pt.x, pt.y, pt.z);
-                                break;
-                            case Acad.ResultValueType.RTANG:
-                            case Acad.ResultValueType.RTLONG:
-                            case Acad.ResultValueType.RTORINT:
-                            case Acad.ResultValueType.RTREAL:
-                            case Acad.ResultValueType.RTSHORT:
-                                this._value = JSON.parse(jsonObj.value);
-                                break;
-                            default:
-                                this._value = jsonObj.value;
-                                break;
-                        }
-                        return this._value;
-                    },
+                function () {
+                    var jsonObj = Acad.SysVarCollectionInterop.getSysVar(this._name);
+                    switch (this._valueType) {
+                        case Acad.ResultValueType.RTPOINT:
+                            var pt = JSON.parse(jsonObj.value);
+                            this._value = new Acad.Point2d(pt.x, pt.y);
+                            break;
+                        case Acad.ResultValueType.RT3DPOINT:
+                            var pt = JSON.parse(jsonObj.value);
+                            this._value = new Acad.Point3d(pt.x, pt.y, pt.z);
+                            break;
+                        case Acad.ResultValueType.RTANG:
+                        case Acad.ResultValueType.RTLONG:
+                        case Acad.ResultValueType.RTORINT:
+                        case Acad.ResultValueType.RTREAL:
+                        case Acad.ResultValueType.RTSHORT:
+                            this._value = JSON.parse(jsonObj.value);
+                            break;
+                        default:
+                            this._value = jsonObj.value;
+                            break;
+                    }
+                    return this._value;
+                },
                 set: function (valToSet) {
                     this.checkIfValidValue(valToSet);
 
                     var strVal;
                     if (typeof valToSet != "string")
                         strVal = JSON.stringify(valToSet);
-                    else
+else
                         strVal = valToSet;
 
                     var typedValueInterop = {
@@ -3123,7 +3170,7 @@ var Autodesk;
                 var strVal;
                 if (typeof sValue != "string")
                     strVal = JSON.stringify(sValue);
-                else
+else
                     strVal = sValue;
 
                 var typedValueInterop = {
@@ -3200,9 +3247,9 @@ var Autodesk;
                 * @Read-Only
                 * @Type Boolean
                 */
-                    function () {
-                        return this._onUpdate;
-                    },
+                function () {
+                    return this._onUpdate;
+                },
                 set: function (val) {
                     throw Error("onUpdate is read-only property");
                 },
@@ -3216,9 +3263,9 @@ var Autodesk;
                 * @Read-Only
                 * @Type Boolean
                 */
-                    function () {
-                        return this._jigOptions;
-                    },
+                function () {
+                    return this._jigOptions;
+                },
                 set: function (val) {
                     throw Error("jigOptions is read-only property");
                 },
@@ -3328,7 +3375,7 @@ var Autodesk;
                         if (obj.retCode !== Acad.ErrorStatus.eJsOk) {
                             if (obj.retErrorString == undefined)
                                 promise.error(obj.retCode);
-                            else
+else
                                 promise.error(obj.retCode, obj.retErrorString);
                             return;
                         }
@@ -3343,7 +3390,7 @@ var Autodesk;
                         delete DataItemCollectionManager.dataItemCollectionSet[colName];
                         if (retErrorString == undefined)
                             promise.error(retCode);
-                        else
+else
                             promise.error(retCode, retErrorString);
                     });
                 } else {
@@ -3892,7 +3939,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 };
@@ -3948,7 +3995,7 @@ var Autodesk;
 
                 //now register a callback with the globalName so that js gets called when the command
                 //is invoked
-                registerCallback(globalName, jsFunc);
+                registerCallback(groupName + "." + globalName, jsFunc);
             }
             Editor.addCommand = addCommand;
             ;
@@ -4457,10 +4504,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -4474,7 +4525,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -4489,10 +4540,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -4506,7 +4561,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -4521,10 +4576,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -4538,7 +4597,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -4553,10 +4612,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -4570,7 +4633,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -4585,10 +4648,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -4602,7 +4669,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -4622,10 +4689,13 @@ var Autodesk;
                 if (jsonObj.retCode != Autodesk.JavaScript.ErrorStatus.eOk) {
                     throw jsonObj;
                 }
-
-                if (jsonObj.retValue)
-                    return JSON.parse(jsonObj.retValue);
-                return jsonObj;
+                if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
+                    return jsonObj.retValue;
+                } else {
+                    if (jsonObj.retValue)
+                        return JSON.parse(jsonObj.retValue);
+                    return jsonObj;
+                }
             }
             ActiveDocumentInterop.highlight = highlight;
 
@@ -4641,10 +4711,13 @@ var Autodesk;
                 if (jsonObj.retCode != Autodesk.JavaScript.ErrorStatus.eOk) {
                     throw jsonObj;
                 }
-
-                if (jsonObj.retValue)
-                    return JSON.parse(jsonObj.retValue);
-                return jsonObj;
+                if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
+                    return jsonObj.retValue;
+                } else {
+                    if (jsonObj.retValue)
+                        return JSON.parse(jsonObj.retValue);
+                    return jsonObj;
+                }
             }
             ActiveDocumentInterop.unhighlight = unhighlight;
 
@@ -4663,9 +4736,10 @@ var Autodesk;
 
             //allows user to supply a callback
             function addHandler_objectModified(userFunction) {
+                var separator = (typeof (apiVersion) == 'function' && apiVersion() > 2) ? '.' : '_';
                 if (objectModified_handlers == null) {
                     objectModified_handlers = new Array();
-                    registerCallback('Ac_ActiveDocumentInterop_objectModified', objectModifiedCallback);
+                    registerCallback('Ac_ActiveDocumentInterop' + separator + 'objectModified', objectModifiedCallback);
                 }
                 objectModified_handlers.push(userFunction);
             }
@@ -4686,9 +4760,10 @@ var Autodesk;
 
             //allows user to supply a callback
             function addHandler_objectErased(userFunction) {
+                var separator = (typeof (apiVersion) == 'function' && apiVersion() > 2) ? '.' : '_';
                 if (objectErased_handlers == null) {
                     objectErased_handlers = new Array();
-                    registerCallback('Ac_ActiveDocumentInterop_objectErased', objectErasedCallback);
+                    registerCallback('Ac_ActiveDocumentInterop' + separator + 'objectErased', objectErasedCallback);
                 }
                 objectErased_handlers.push(userFunction);
             }
@@ -4726,10 +4801,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -4743,7 +4822,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -4758,10 +4837,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -4775,7 +4858,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -4790,10 +4873,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -4807,7 +4894,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -4822,10 +4909,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -4839,7 +4930,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -4854,10 +4945,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -4871,7 +4966,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -4886,10 +4981,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -4903,7 +5002,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -4918,10 +5017,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -4935,7 +5038,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -4950,10 +5053,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -4967,7 +5074,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -4987,10 +5094,13 @@ var Autodesk;
                 if (jsonObj.retCode != Autodesk.JavaScript.ErrorStatus.eOk) {
                     throw jsonObj;
                 }
-
-                if (jsonObj.retValue)
-                    return JSON.parse(jsonObj.retValue);
-                return jsonObj;
+                if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
+                    return jsonObj.retValue;
+                } else {
+                    if (jsonObj.retValue)
+                        return JSON.parse(jsonObj.retValue);
+                    return jsonObj;
+                }
             }
             ApplicationInterop.showTooltip = showTooltip;
 
@@ -5006,12 +5116,72 @@ var Autodesk;
                 if (jsonObj.retCode != Autodesk.JavaScript.ErrorStatus.eOk) {
                     throw jsonObj;
                 }
-
-                if (jsonObj.retValue)
-                    return JSON.parse(jsonObj.retValue);
-                return jsonObj;
+                if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
+                    return jsonObj.retValue;
+                } else {
+                    if (jsonObj.retValue)
+                        return JSON.parse(jsonObj.retValue);
+                    return jsonObj;
+                }
             }
             ApplicationInterop.hideTooltip = hideTooltip;
+            function displayContextMenu(x, y, menu) {
+                var promise = new Autodesk.JavaScript.Promise();
+                execAsync(JSON.stringify({
+                    functionName: 'Ac_ApplicationInterop.displayContextMenu',
+                    functionParams: { x: x, y: y, menu: menu }
+                }), function (result) {
+                    if (typeof (promise.success) == 'function') {
+                        var resObj = JSON.parse(result);
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
+                            promise.success(resObj.retValue);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
+                    }
+                }, function (result) {
+                    if (typeof (promise.error) == 'function') {
+                        var error = JSON.parse(result);
+
+                        if (error.retCode == undefined)
+                            throw TypeError("Internal error: retCode is not present.");
+
+                        if (error.retCode == Autodesk.JavaScript.ErrorStatus.eOk)
+                            throw "Internal error: retCode is eOk in error callback.";
+
+                        if (error.retErrorString == undefined)
+                            promise.error(error.retCode);
+else
+                            promise.error(error.retCode, error.retErrorString);
+                    }
+                });
+                return promise;
+            }
+            ApplicationInterop.displayContextMenu = displayContextMenu;
+
+            var applicationReadyEvent_handlers = null;
+
+            //called by native code: fires event to callback supplied by the user
+            function applicationReadyEventCallback(args) {
+                var obj = JSON.parse(args);
+
+                for (var i = 0; i < applicationReadyEvent_handlers.length; ++i)
+                    applicationReadyEvent_handlers[i]();
+            }
+
+            //allows user to supply a callback
+            function addHandler_applicationReadyEvent(userFunction) {
+                var separator = (typeof (apiVersion) == 'function' && apiVersion() > 2) ? '.' : '_';
+                if (applicationReadyEvent_handlers == null) {
+                    applicationReadyEvent_handlers = new Array();
+                    registerCallback('Ac_ApplicationInterop' + separator + 'applicationReadyEvent', applicationReadyEventCallback);
+                }
+                applicationReadyEvent_handlers.push(userFunction);
+            }
+            ApplicationInterop.addHandler_applicationReadyEvent = addHandler_applicationReadyEvent;
         })(AutoCAD.ApplicationInterop || (AutoCAD.ApplicationInterop = {}));
         var ApplicationInterop = AutoCAD.ApplicationInterop;
     })(Autodesk.AutoCAD || (Autodesk.AutoCAD = {}));
@@ -5049,10 +5219,13 @@ var Autodesk;
                 if (jsonObj.retCode != Autodesk.JavaScript.ErrorStatus.eOk) {
                     throw jsonObj;
                 }
-
-                if (jsonObj.retValue)
-                    return JSON.parse(jsonObj.retValue);
-                return jsonObj;
+                if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
+                    return jsonObj.retValue;
+                } else {
+                    if (jsonObj.retValue)
+                        return JSON.parse(jsonObj.retValue);
+                    return jsonObj;
+                }
             }
             CurrentViewportInterop.dolly = dolly;
 
@@ -5068,10 +5241,13 @@ var Autodesk;
                 if (jsonObj.retCode != Autodesk.JavaScript.ErrorStatus.eOk) {
                     throw jsonObj;
                 }
-
-                if (jsonObj.retValue)
-                    return JSON.parse(jsonObj.retValue);
-                return jsonObj;
+                if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
+                    return jsonObj.retValue;
+                } else {
+                    if (jsonObj.retValue)
+                        return JSON.parse(jsonObj.retValue);
+                    return jsonObj;
+                }
             }
             CurrentViewportInterop.roll = roll;
 
@@ -5087,10 +5263,13 @@ var Autodesk;
                 if (jsonObj.retCode != Autodesk.JavaScript.ErrorStatus.eOk) {
                     throw jsonObj;
                 }
-
-                if (jsonObj.retValue)
-                    return JSON.parse(jsonObj.retValue);
-                return jsonObj;
+                if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
+                    return jsonObj.retValue;
+                } else {
+                    if (jsonObj.retValue)
+                        return JSON.parse(jsonObj.retValue);
+                    return jsonObj;
+                }
             }
             CurrentViewportInterop.orbit = orbit;
 
@@ -5106,10 +5285,13 @@ var Autodesk;
                 if (jsonObj.retCode != Autodesk.JavaScript.ErrorStatus.eOk) {
                     throw jsonObj;
                 }
-
-                if (jsonObj.retValue)
-                    return JSON.parse(jsonObj.retValue);
-                return jsonObj;
+                if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
+                    return jsonObj.retValue;
+                } else {
+                    if (jsonObj.retValue)
+                        return JSON.parse(jsonObj.retValue);
+                    return jsonObj;
+                }
             }
             CurrentViewportInterop.pan = pan;
 
@@ -5125,10 +5307,13 @@ var Autodesk;
                 if (jsonObj.retCode != Autodesk.JavaScript.ErrorStatus.eOk) {
                     throw jsonObj;
                 }
-
-                if (jsonObj.retValue)
-                    return JSON.parse(jsonObj.retValue);
-                return jsonObj;
+                if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
+                    return jsonObj.retValue;
+                } else {
+                    if (jsonObj.retValue)
+                        return JSON.parse(jsonObj.retValue);
+                    return jsonObj;
+                }
             }
             CurrentViewportInterop.zoomExtents = zoomExtents;
 
@@ -5144,10 +5329,13 @@ var Autodesk;
                 if (jsonObj.retCode != Autodesk.JavaScript.ErrorStatus.eOk) {
                     throw jsonObj;
                 }
-
-                if (jsonObj.retValue)
-                    return JSON.parse(jsonObj.retValue);
-                return jsonObj;
+                if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
+                    return jsonObj.retValue;
+                } else {
+                    if (jsonObj.retValue)
+                        return JSON.parse(jsonObj.retValue);
+                    return jsonObj;
+                }
             }
             CurrentViewportInterop.zoom = zoom;
 
@@ -5163,10 +5351,13 @@ var Autodesk;
                 if (jsonObj.retCode != Autodesk.JavaScript.ErrorStatus.eOk) {
                     throw jsonObj;
                 }
-
-                if (jsonObj.retValue)
-                    return JSON.parse(jsonObj.retValue);
-                return jsonObj;
+                if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
+                    return jsonObj.retValue;
+                } else {
+                    if (jsonObj.retValue)
+                        return JSON.parse(jsonObj.retValue);
+                    return jsonObj;
+                }
             }
             CurrentViewportInterop.zoomWindow = zoomWindow;
 
@@ -5182,10 +5373,13 @@ var Autodesk;
                 if (jsonObj.retCode != Autodesk.JavaScript.ErrorStatus.eOk) {
                     throw jsonObj;
                 }
-
-                if (jsonObj.retValue)
-                    return JSON.parse(jsonObj.retValue);
-                return jsonObj;
+                if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
+                    return jsonObj.retValue;
+                } else {
+                    if (jsonObj.retValue)
+                        return JSON.parse(jsonObj.retValue);
+                    return jsonObj;
+                }
             }
             CurrentViewportInterop.pointToScreen = pointToScreen;
 
@@ -5201,10 +5395,13 @@ var Autodesk;
                 if (jsonObj.retCode != Autodesk.JavaScript.ErrorStatus.eOk) {
                     throw jsonObj;
                 }
-
-                if (jsonObj.retValue)
-                    return JSON.parse(jsonObj.retValue);
-                return jsonObj;
+                if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
+                    return jsonObj.retValue;
+                } else {
+                    if (jsonObj.retValue)
+                        return JSON.parse(jsonObj.retValue);
+                    return jsonObj;
+                }
             }
             CurrentViewportInterop.pointToWorld = pointToWorld;
 
@@ -5220,10 +5417,13 @@ var Autodesk;
                 if (jsonObj.retCode != Autodesk.JavaScript.ErrorStatus.eOk) {
                     throw jsonObj;
                 }
-
-                if (jsonObj.retValue)
-                    return JSON.parse(jsonObj.retValue);
-                return jsonObj;
+                if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
+                    return jsonObj.retValue;
+                } else {
+                    if (jsonObj.retValue)
+                        return JSON.parse(jsonObj.retValue);
+                    return jsonObj;
+                }
             }
             CurrentViewportInterop.ucsToWorld = ucsToWorld;
 
@@ -5239,10 +5439,13 @@ var Autodesk;
                 if (jsonObj.retCode != Autodesk.JavaScript.ErrorStatus.eOk) {
                     throw jsonObj;
                 }
-
-                if (jsonObj.retValue)
-                    return JSON.parse(jsonObj.retValue);
-                return jsonObj;
+                if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
+                    return jsonObj.retValue;
+                } else {
+                    if (jsonObj.retValue)
+                        return JSON.parse(jsonObj.retValue);
+                    return jsonObj;
+                }
             }
             CurrentViewportInterop.worldToUCS = worldToUCS;
 
@@ -5258,10 +5461,13 @@ var Autodesk;
                 if (jsonObj.retCode != Autodesk.JavaScript.ErrorStatus.eOk) {
                     throw jsonObj;
                 }
-
-                if (jsonObj.retValue)
-                    return JSON.parse(jsonObj.retValue);
-                return jsonObj;
+                if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
+                    return jsonObj.retValue;
+                } else {
+                    if (jsonObj.retValue)
+                        return JSON.parse(jsonObj.retValue);
+                    return jsonObj;
+                }
             }
             CurrentViewportInterop.setView = setView;
 
@@ -5277,10 +5483,13 @@ var Autodesk;
                 if (jsonObj.retCode != Autodesk.JavaScript.ErrorStatus.eOk) {
                     throw jsonObj;
                 }
-
-                if (jsonObj.retValue)
-                    return JSON.parse(jsonObj.retValue);
-                return jsonObj;
+                if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
+                    return jsonObj.retValue;
+                } else {
+                    if (jsonObj.retValue)
+                        return JSON.parse(jsonObj.retValue);
+                    return jsonObj;
+                }
             }
             CurrentViewportInterop.getViewport = getViewport;
 
@@ -5296,10 +5505,13 @@ var Autodesk;
                 if (jsonObj.retCode != Autodesk.JavaScript.ErrorStatus.eOk) {
                     throw jsonObj;
                 }
-
-                if (jsonObj.retValue)
-                    return JSON.parse(jsonObj.retValue);
-                return jsonObj;
+                if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
+                    return jsonObj.retValue;
+                } else {
+                    if (jsonObj.retValue)
+                        return JSON.parse(jsonObj.retValue);
+                    return jsonObj;
+                }
             }
             CurrentViewportInterop.getViewProperties = getViewProperties;
 
@@ -5315,10 +5527,13 @@ var Autodesk;
                 if (jsonObj.retCode != Autodesk.JavaScript.ErrorStatus.eOk) {
                     throw jsonObj;
                 }
-
-                if (jsonObj.retValue)
-                    return JSON.parse(jsonObj.retValue);
-                return jsonObj;
+                if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
+                    return jsonObj.retValue;
+                } else {
+                    if (jsonObj.retValue)
+                        return JSON.parse(jsonObj.retValue);
+                    return jsonObj;
+                }
             }
             CurrentViewportInterop.get_position = get_position;
 
@@ -5334,10 +5549,13 @@ var Autodesk;
                 if (jsonObj.retCode != Autodesk.JavaScript.ErrorStatus.eOk) {
                     throw jsonObj;
                 }
-
-                if (jsonObj.retValue)
-                    return JSON.parse(jsonObj.retValue);
-                return jsonObj;
+                if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
+                    return jsonObj.retValue;
+                } else {
+                    if (jsonObj.retValue)
+                        return JSON.parse(jsonObj.retValue);
+                    return jsonObj;
+                }
             }
             CurrentViewportInterop.get_target = get_target;
 
@@ -5353,10 +5571,13 @@ var Autodesk;
                 if (jsonObj.retCode != Autodesk.JavaScript.ErrorStatus.eOk) {
                     throw jsonObj;
                 }
-
-                if (jsonObj.retValue)
-                    return JSON.parse(jsonObj.retValue);
-                return jsonObj;
+                if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
+                    return jsonObj.retValue;
+                } else {
+                    if (jsonObj.retValue)
+                        return JSON.parse(jsonObj.retValue);
+                    return jsonObj;
+                }
             }
             CurrentViewportInterop.get_upVector = get_upVector;
 
@@ -5372,10 +5593,13 @@ var Autodesk;
                 if (jsonObj.retCode != Autodesk.JavaScript.ErrorStatus.eOk) {
                     throw jsonObj;
                 }
-
-                if (jsonObj.retValue)
-                    return JSON.parse(jsonObj.retValue);
-                return jsonObj;
+                if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
+                    return jsonObj.retValue;
+                } else {
+                    if (jsonObj.retValue)
+                        return JSON.parse(jsonObj.retValue);
+                    return jsonObj;
+                }
             }
             CurrentViewportInterop.get_fieldWidth = get_fieldWidth;
 
@@ -5391,10 +5615,13 @@ var Autodesk;
                 if (jsonObj.retCode != Autodesk.JavaScript.ErrorStatus.eOk) {
                     throw jsonObj;
                 }
-
-                if (jsonObj.retValue)
-                    return JSON.parse(jsonObj.retValue);
-                return jsonObj;
+                if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
+                    return jsonObj.retValue;
+                } else {
+                    if (jsonObj.retValue)
+                        return JSON.parse(jsonObj.retValue);
+                    return jsonObj;
+                }
             }
             CurrentViewportInterop.get_fieldHeight = get_fieldHeight;
 
@@ -5410,10 +5637,13 @@ var Autodesk;
                 if (jsonObj.retCode != Autodesk.JavaScript.ErrorStatus.eOk) {
                     throw jsonObj;
                 }
-
-                if (jsonObj.retValue)
-                    return JSON.parse(jsonObj.retValue);
-                return jsonObj;
+                if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
+                    return jsonObj.retValue;
+                } else {
+                    if (jsonObj.retValue)
+                        return JSON.parse(jsonObj.retValue);
+                    return jsonObj;
+                }
             }
             CurrentViewportInterop.get_projection = get_projection;
 
@@ -5429,10 +5659,13 @@ var Autodesk;
                 if (jsonObj.retCode != Autodesk.JavaScript.ErrorStatus.eOk) {
                     throw jsonObj;
                 }
-
-                if (jsonObj.retValue)
-                    return JSON.parse(jsonObj.retValue);
-                return jsonObj;
+                if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
+                    return jsonObj.retValue;
+                } else {
+                    if (jsonObj.retValue)
+                        return JSON.parse(jsonObj.retValue);
+                    return jsonObj;
+                }
             }
             CurrentViewportInterop.getViewport3D = getViewport3D;
 
@@ -5448,10 +5681,13 @@ var Autodesk;
                 if (jsonObj.retCode != Autodesk.JavaScript.ErrorStatus.eOk) {
                     throw jsonObj;
                 }
-
-                if (jsonObj.retValue)
-                    return JSON.parse(jsonObj.retValue);
-                return jsonObj;
+                if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
+                    return jsonObj.retValue;
+                } else {
+                    if (jsonObj.retValue)
+                        return JSON.parse(jsonObj.retValue);
+                    return jsonObj;
+                }
             }
             CurrentViewportInterop.convertViewport3D = convertViewport3D;
         })(AutoCAD.CurrentViewportInterop || (AutoCAD.CurrentViewportInterop = {}));
@@ -5487,10 +5723,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -5504,7 +5744,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -5527,9 +5767,10 @@ var Autodesk;
 
             //allows user to supply a callback
             function addHandler_resetEvent(userFunction) {
+                var separator = (typeof (apiVersion) == 'function' && apiVersion() > 2) ? '.' : '_';
                 if (resetEvent_handlers == null) {
                     resetEvent_handlers = new Array();
-                    registerCallback('Ac_DataItemCollectionManagerInterop_resetEvent', resetEventCallback);
+                    registerCallback('Ac_DataItemCollectionManagerInterop' + separator + 'resetEvent', resetEventCallback);
                 }
                 resetEvent_handlers.push(userFunction);
             }
@@ -5550,9 +5791,10 @@ var Autodesk;
 
             //allows user to supply a callback
             function addHandler_collectionChangedEvent(userFunction) {
+                var separator = (typeof (apiVersion) == 'function' && apiVersion() > 2) ? '.' : '_';
                 if (collectionChangedEvent_handlers == null) {
                     collectionChangedEvent_handlers = new Array();
-                    registerCallback('Ac_DataItemCollectionManagerInterop_collectionChangedEvent', collectionChangedEventCallback);
+                    registerCallback('Ac_DataItemCollectionManagerInterop' + separator + 'collectionChangedEvent', collectionChangedEventCallback);
                 }
                 collectionChangedEvent_handlers.push(userFunction);
             }
@@ -5573,9 +5815,10 @@ var Autodesk;
 
             //allows user to supply a callback
             function addHandler_itemsChangedEvent(userFunction) {
+                var separator = (typeof (apiVersion) == 'function' && apiVersion() > 2) ? '.' : '_';
                 if (itemsChangedEvent_handlers == null) {
                     itemsChangedEvent_handlers = new Array();
-                    registerCallback('Ac_DataItemCollectionManagerInterop_itemsChangedEvent', itemsChangedEventCallback);
+                    registerCallback('Ac_DataItemCollectionManagerInterop' + separator + 'itemsChangedEvent', itemsChangedEventCallback);
                 }
                 itemsChangedEvent_handlers.push(userFunction);
             }
@@ -5617,10 +5860,13 @@ var Autodesk;
                 if (jsonObj.retCode != Autodesk.JavaScript.ErrorStatus.eOk) {
                     throw jsonObj;
                 }
-
-                if (jsonObj.retValue)
-                    return JSON.parse(jsonObj.retValue);
-                return jsonObj;
+                if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
+                    return jsonObj.retValue;
+                } else {
+                    if (jsonObj.retValue)
+                        return JSON.parse(jsonObj.retValue);
+                    return jsonObj;
+                }
             }
             DataItemInterop.getProperties = getProperties;
         })(AutoCAD.DataItemInterop || (AutoCAD.DataItemInterop = {}));
@@ -5660,10 +5906,13 @@ var Autodesk;
                 if (jsonObj.retCode != Autodesk.JavaScript.ErrorStatus.eOk) {
                     throw jsonObj;
                 }
-
-                if (jsonObj.retValue)
-                    return JSON.parse(jsonObj.retValue);
-                return jsonObj;
+                if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
+                    return jsonObj.retValue;
+                } else {
+                    if (jsonObj.retValue)
+                        return JSON.parse(jsonObj.retValue);
+                    return jsonObj;
+                }
             }
             DBEntityInterop.getExtents = getExtents;
 
@@ -5679,10 +5928,13 @@ var Autodesk;
                 if (jsonObj.retCode != Autodesk.JavaScript.ErrorStatus.eOk) {
                     throw jsonObj;
                 }
-
-                if (jsonObj.retValue)
-                    return JSON.parse(jsonObj.retValue);
-                return jsonObj;
+                if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
+                    return jsonObj.retValue;
+                } else {
+                    if (jsonObj.retValue)
+                        return JSON.parse(jsonObj.retValue);
+                    return jsonObj;
+                }
             }
             DBEntityInterop.getProperties = getProperties;
         })(AutoCAD.DBEntityInterop || (AutoCAD.DBEntityInterop = {}));
@@ -5722,10 +5974,13 @@ var Autodesk;
                 if (jsonObj.retCode != Autodesk.JavaScript.ErrorStatus.eOk) {
                     throw jsonObj;
                 }
-
-                if (jsonObj.retValue)
-                    return JSON.parse(jsonObj.retValue);
-                return jsonObj;
+                if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
+                    return jsonObj.retValue;
+                } else {
+                    if (jsonObj.retValue)
+                        return JSON.parse(jsonObj.retValue);
+                    return jsonObj;
+                }
             }
             EditorInterop.captureView = captureView;
 
@@ -5741,10 +5996,13 @@ var Autodesk;
                 if (jsonObj.retCode != Autodesk.JavaScript.ErrorStatus.eOk) {
                     throw jsonObj;
                 }
-
-                if (jsonObj.retValue)
-                    return JSON.parse(jsonObj.retValue);
-                return jsonObj;
+                if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
+                    return jsonObj.retValue;
+                } else {
+                    if (jsonObj.retValue)
+                        return JSON.parse(jsonObj.retValue);
+                    return jsonObj;
+                }
             }
             EditorInterop.restoreView = restoreView;
 
@@ -5760,10 +6018,13 @@ var Autodesk;
                 if (jsonObj.retCode != Autodesk.JavaScript.ErrorStatus.eOk) {
                     throw jsonObj;
                 }
-
-                if (jsonObj.retValue)
-                    return JSON.parse(jsonObj.retValue);
-                return jsonObj;
+                if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
+                    return jsonObj.retValue;
+                } else {
+                    if (jsonObj.retValue)
+                        return JSON.parse(jsonObj.retValue);
+                    return jsonObj;
+                }
             }
             EditorInterop.executeCommand = executeCommand;
 
@@ -5779,10 +6040,13 @@ var Autodesk;
                 if (jsonObj.retCode != Autodesk.JavaScript.ErrorStatus.eOk) {
                     throw jsonObj;
                 }
-
-                if (jsonObj.retValue)
-                    return JSON.parse(jsonObj.retValue);
-                return jsonObj;
+                if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
+                    return jsonObj.retValue;
+                } else {
+                    if (jsonObj.retValue)
+                        return JSON.parse(jsonObj.retValue);
+                    return jsonObj;
+                }
             }
             EditorInterop.addCommand = addCommand;
 
@@ -5798,10 +6062,13 @@ var Autodesk;
                 if (jsonObj.retCode != Autodesk.JavaScript.ErrorStatus.eOk) {
                     throw jsonObj;
                 }
-
-                if (jsonObj.retValue)
-                    return JSON.parse(jsonObj.retValue);
-                return jsonObj;
+                if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
+                    return jsonObj.retValue;
+                } else {
+                    if (jsonObj.retValue)
+                        return JSON.parse(jsonObj.retValue);
+                    return jsonObj;
+                }
             }
             EditorInterop.cancelCommand = cancelCommand;
 
@@ -5817,10 +6084,13 @@ var Autodesk;
                 if (jsonObj.retCode != Autodesk.JavaScript.ErrorStatus.eOk) {
                     throw jsonObj;
                 }
-
-                if (jsonObj.retValue)
-                    return JSON.parse(jsonObj.retValue);
-                return jsonObj;
+                if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
+                    return jsonObj.retValue;
+                } else {
+                    if (jsonObj.retValue)
+                        return JSON.parse(jsonObj.retValue);
+                    return jsonObj;
+                }
             }
             EditorInterop.isQuiescent = isQuiescent;
             function getInteger(promptOpts) {
@@ -5831,10 +6101,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -5848,7 +6122,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -5863,10 +6137,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -5880,7 +6158,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -5895,10 +6173,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -5912,7 +6194,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -5927,10 +6209,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -5944,7 +6230,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -5959,10 +6245,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -5976,7 +6266,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -5991,10 +6281,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -6008,7 +6302,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -6023,10 +6317,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -6040,7 +6338,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -6055,10 +6353,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -6072,7 +6374,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -6087,10 +6389,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -6104,7 +6410,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -6119,10 +6425,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -6136,7 +6446,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -6151,10 +6461,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -6168,7 +6482,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -6183,10 +6497,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -6200,7 +6518,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -6215,10 +6533,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -6232,7 +6554,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -6247,10 +6569,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -6264,7 +6590,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -6279,10 +6605,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -6296,7 +6626,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -6311,10 +6641,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -6328,7 +6662,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -6343,10 +6677,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -6360,13 +6698,37 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
                 return promise;
             }
             EditorInterop.getFileNameForSave = getFileNameForSave;
+
+            var commandEndedEvent_handlers = null;
+
+            //called by native code: fires event to callback supplied by the user
+            function commandEndedEventCallback(args) {
+                var obj = JSON.parse(args);
+
+                //unpack all event arguments
+                var command = obj.command;
+
+                for (var i = 0; i < commandEndedEvent_handlers.length; ++i)
+                    commandEndedEvent_handlers[i](command);
+            }
+
+            //allows user to supply a callback
+            function addHandler_commandEndedEvent(userFunction) {
+                var separator = (typeof (apiVersion) == 'function' && apiVersion() > 2) ? '.' : '_';
+                if (commandEndedEvent_handlers == null) {
+                    commandEndedEvent_handlers = new Array();
+                    registerCallback('Ac_EditorInterop' + separator + 'commandEndedEvent', commandEndedEventCallback);
+                }
+                commandEndedEvent_handlers.push(userFunction);
+            }
+            EditorInterop.addHandler_commandEndedEvent = addHandler_commandEndedEvent;
         })(AutoCAD.EditorInterop || (AutoCAD.EditorInterop = {}));
         var EditorInterop = AutoCAD.EditorInterop;
     })(Autodesk.AutoCAD || (Autodesk.AutoCAD = {}));
@@ -6400,10 +6762,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -6417,7 +6783,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -6440,8 +6806,9 @@ var Autodesk;
 
             //allows user to supply a callback
             function setHandler_updateEvent(userFunction) {
+                var separator = (typeof (apiVersion) == 'function' && apiVersion() > 2) ? '.' : '_';
                 if (updateEvent_handler == null) {
-                    registerCallback('Ac_JigInterop_updateEvent', updateEventCallback);
+                    registerCallback('Ac_JigInterop' + separator + 'updateEvent', updateEventCallback);
                 }
                 updateEvent_handler = userFunction;
             }
@@ -6483,10 +6850,13 @@ var Autodesk;
                 if (jsonObj.retCode != Autodesk.JavaScript.ErrorStatus.eOk) {
                     throw jsonObj;
                 }
-
-                if (jsonObj.retValue)
-                    return JSON.parse(jsonObj.retValue);
-                return jsonObj;
+                if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
+                    return jsonObj.retValue;
+                } else {
+                    if (jsonObj.retValue)
+                        return JSON.parse(jsonObj.retValue);
+                    return jsonObj;
+                }
             }
             Logger.get_isLoggingEnabled = get_isLoggingEnabled;
             function logFatal(msg) {
@@ -6497,10 +6867,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -6514,7 +6888,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -6529,10 +6903,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -6546,7 +6924,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -6561,10 +6939,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -6578,7 +6960,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -6593,10 +6975,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -6610,7 +6996,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -6625,10 +7011,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -6642,7 +7032,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -6657,10 +7047,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -6674,7 +7068,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -6694,10 +7088,13 @@ var Autodesk;
                 if (jsonObj.retCode != Autodesk.JavaScript.ErrorStatus.eOk) {
                     throw jsonObj;
                 }
-
-                if (jsonObj.retValue)
-                    return JSON.parse(jsonObj.retValue);
-                return jsonObj;
+                if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
+                    return jsonObj.retValue;
+                } else {
+                    if (jsonObj.retValue)
+                        return JSON.parse(jsonObj.retValue);
+                    return jsonObj;
+                }
             }
             Logger.get_logLevel = get_logLevel;
             function set_logLevel(value) {
@@ -6708,10 +7105,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -6725,7 +7126,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -6769,10 +7170,13 @@ var Autodesk;
                 if (jsonObj.retCode != Autodesk.JavaScript.ErrorStatus.eOk) {
                     throw jsonObj;
                 }
-
-                if (jsonObj.retValue)
-                    return JSON.parse(jsonObj.retValue);
-                return jsonObj;
+                if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
+                    return jsonObj.retValue;
+                } else {
+                    if (jsonObj.retValue)
+                        return JSON.parse(jsonObj.retValue);
+                    return jsonObj;
+                }
             }
             SecureFileInterop.getContents = getContents;
 
@@ -6788,10 +7192,13 @@ var Autodesk;
                 if (jsonObj.retCode != Autodesk.JavaScript.ErrorStatus.eOk) {
                     throw jsonObj;
                 }
-
-                if (jsonObj.retValue)
-                    return JSON.parse(jsonObj.retValue);
-                return jsonObj;
+                if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
+                    return jsonObj.retValue;
+                } else {
+                    if (jsonObj.retValue)
+                        return JSON.parse(jsonObj.retValue);
+                    return jsonObj;
+                }
             }
             SecureFileInterop.getFileSize = getFileSize;
 
@@ -6807,10 +7214,13 @@ var Autodesk;
                 if (jsonObj.retCode != Autodesk.JavaScript.ErrorStatus.eOk) {
                     throw jsonObj;
                 }
-
-                if (jsonObj.retValue)
-                    return JSON.parse(jsonObj.retValue);
-                return jsonObj;
+                if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
+                    return jsonObj.retValue;
+                } else {
+                    if (jsonObj.retValue)
+                        return JSON.parse(jsonObj.retValue);
+                    return jsonObj;
+                }
             }
             SecureFileInterop.setContents = setContents;
 
@@ -6826,10 +7236,13 @@ var Autodesk;
                 if (jsonObj.retCode != Autodesk.JavaScript.ErrorStatus.eOk) {
                     throw jsonObj;
                 }
-
-                if (jsonObj.retValue)
-                    return JSON.parse(jsonObj.retValue);
-                return jsonObj;
+                if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
+                    return jsonObj.retValue;
+                } else {
+                    if (jsonObj.retValue)
+                        return JSON.parse(jsonObj.retValue);
+                    return jsonObj;
+                }
             }
             SecureFileInterop.release = release;
         })(AutoCAD.SecureFileInterop || (AutoCAD.SecureFileInterop = {}));
@@ -6869,10 +7282,13 @@ var Autodesk;
                 if (jsonObj.retCode != Autodesk.JavaScript.ErrorStatus.eOk) {
                     throw jsonObj;
                 }
-
-                if (jsonObj.retValue)
-                    return JSON.parse(jsonObj.retValue);
-                return jsonObj;
+                if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
+                    return jsonObj.retValue;
+                } else {
+                    if (jsonObj.retValue)
+                        return JSON.parse(jsonObj.retValue);
+                    return jsonObj;
+                }
             }
             SysVarCollectionInterop.getSysVar = getSysVar;
 
@@ -6888,10 +7304,13 @@ var Autodesk;
                 if (jsonObj.retCode != Autodesk.JavaScript.ErrorStatus.eOk) {
                     throw jsonObj;
                 }
-
-                if (jsonObj.retValue)
-                    return JSON.parse(jsonObj.retValue);
-                return jsonObj;
+                if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
+                    return jsonObj.retValue;
+                } else {
+                    if (jsonObj.retValue)
+                        return JSON.parse(jsonObj.retValue);
+                    return jsonObj;
+                }
             }
             SysVarCollectionInterop.setSysVarValue = setSysVarValue;
             function postSysVarValue(varName, sysVarValueInterop) {
@@ -6902,10 +7321,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -6919,7 +7342,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -6934,10 +7357,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -6951,7 +7378,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -6966,10 +7393,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -6983,7 +7414,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -7006,9 +7437,10 @@ var Autodesk;
 
             //allows user to supply a callback
             function addHandler_sysVarChanged(userFunction) {
+                var separator = (typeof (apiVersion) == 'function' && apiVersion() > 2) ? '.' : '_';
                 if (sysVarChanged_handlers == null) {
                     sysVarChanged_handlers = new Array();
-                    registerCallback('Ac_SysVarCollectionInterop_sysVarChanged', sysVarChangedCallback);
+                    registerCallback('Ac_SysVarCollectionInterop' + separator + 'sysVarChanged', sysVarChangedCallback);
                 }
                 sysVarChanged_handlers.push(userFunction);
             }
@@ -7046,10 +7478,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -7063,7 +7499,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -7078,10 +7514,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -7095,7 +7535,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -7110,10 +7550,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -7127,7 +7571,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -7142,10 +7586,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -7159,7 +7607,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -7179,10 +7627,13 @@ var Autodesk;
                 if (jsonObj.retCode != Autodesk.JavaScript.ErrorStatus.eOk) {
                     throw jsonObj;
                 }
-
-                if (jsonObj.retValue)
-                    return JSON.parse(jsonObj.retValue);
-                return jsonObj;
+                if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
+                    return jsonObj.retValue;
+                } else {
+                    if (jsonObj.retValue)
+                        return JSON.parse(jsonObj.retValue);
+                    return jsonObj;
+                }
             }
             TransientManagerInterop.getNewTransientId = getNewTransientId;
             function showTransients(ids, bShow) {
@@ -7193,10 +7644,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -7210,7 +7665,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -7225,10 +7680,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -7242,7 +7701,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -7257,10 +7716,14 @@ var Autodesk;
                 }), function (result) {
                     if (typeof (promise.success) == 'function') {
                         var resObj = JSON.parse(result);
-                        if (resObj.hasOwnProperty("retValue"))
+                        if (typeof (apiVersion) == 'function' && apiVersion() > 2) {
                             promise.success(resObj.retValue);
-                        else
-                            promise.success(resObj);
+                        } else {
+                            if (resObj.hasOwnProperty("retValue"))
+                                promise.success(JSON.parse(resObj.retValue));
+else
+                                promise.success(resObj);
+                        }
                     }
                 }, function (result) {
                     if (typeof (promise.error) == 'function') {
@@ -7274,7 +7737,7 @@ var Autodesk;
 
                         if (error.retErrorString == undefined)
                             promise.error(error.retCode);
-                        else
+else
                             promise.error(error.retCode, error.retErrorString);
                     }
                 });
@@ -7297,9 +7760,10 @@ var Autodesk;
 
             //allows user to supply a callback
             function addHandler_mouseChanged(userFunction) {
+                var separator = (typeof (apiVersion) == 'function' && apiVersion() > 2) ? '.' : '_';
                 if (mouseChanged_handlers == null) {
                     mouseChanged_handlers = new Array();
-                    registerCallback('Ac_TransientManagerInterop_mouseChanged', mouseChangedCallback);
+                    registerCallback('Ac_TransientManagerInterop' + separator + 'mouseChanged', mouseChangedCallback);
                 }
                 mouseChanged_handlers.push(userFunction);
             }
@@ -7314,8 +7778,8 @@ var Autodesk;
 // SIG // MIIZNgYJKoZIhvcNAQcCoIIZJzCCGSMCAQExCzAJBgUr
 // SIG // DgMCGgUAMGcGCisGAQQBgjcCAQSgWTBXMDIGCisGAQQB
 // SIG // gjcCAR4wJAIBAQQQEODJBs441BGiowAQS9NQkAIBAAIB
-// SIG // AAIBAAIBAAIBADAhMAkGBSsOAwIaBQAEFMzZ3Yf3Sy83
-// SIG // GKViBbQo0KS7Gr75oIIUMDCCA+4wggNXoAMCAQICEH6T
+// SIG // AAIBAAIBAAIBADAhMAkGBSsOAwIaBQAEFKD+CygGHBtR
+// SIG // HVJoGbhUBHRCyLEUoIIUMDCCA+4wggNXoAMCAQICEH6T
 // SIG // 6/t8xk5Z6kuad9QG/DswDQYJKoZIhvcNAQEFBQAwgYsx
 // SIG // CzAJBgNVBAYTAlpBMRUwEwYDVQQIEwxXZXN0ZXJuIENh
 // SIG // cGUxFDASBgNVBAcTC0R1cmJhbnZpbGxlMQ8wDQYDVQQK
@@ -7481,30 +7945,30 @@ var Autodesk;
 // SIG // Q0ECECnBWz+qzVJqTme9PE5+P/IwCQYFKw4DAhoFAKBw
 // SIG // MBAGCisGAQQBgjcCAQwxAjAAMBkGCSqGSIb3DQEJAzEM
 // SIG // BgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgor
-// SIG // BgEEAYI3AgEVMCMGCSqGSIb3DQEJBDEWBBTIhYusw1b8
-// SIG // pigmd6yZFLr3TxE/rjANBgkqhkiG9w0BAQEFAASCAQCc
-// SIG // VVmnZmwRn9skD0aXxHLkcqOpDn4fgiRVazX2WoiI9glx
-// SIG // /z3cpaJwrCC3SI7wMjsrmM9jocxt2lmIwgwPpkXQ5T6v
-// SIG // nqmNJ7TBcu9PMOPGoXZ2+OvO6/oifmLmBZSd9ynsa3ow
-// SIG // Wem7NHK9h8dS9PMyV+A3VgxAKhIr7YctV6ksf1rXY80m
-// SIG // HtWAag3vdOagZfRSB2mgU7VA1lGC9/zw6WKVZWFBLxyV
-// SIG // vfBx7vXHbWE+E0Lcx7aU4TZ/8FPBYEQ/hNKeqsd5Htzo
-// SIG // IUv8P6xb5/F0zjgX3/jCEWkBOrkvS/Wlydhv5R3Mmfyb
-// SIG // h0otwrrhgjC/rpeZfLzYdWuMl+G5BuI5oYICCzCCAgcG
+// SIG // BgEEAYI3AgEVMCMGCSqGSIb3DQEJBDEWBBSI/UqHdkUS
+// SIG // Hgg9VNTXVF61uC4wWjANBgkqhkiG9w0BAQEFAASCAQAs
+// SIG // OtHSnEkQfJt9IxjmshozWzKuKbxRnQzXNIBTzs6dBeha
+// SIG // glAN3SAyt/EVhvGQvklcdwI+BLAOB8u0xTwU6/mdjcSB
+// SIG // 1TJQqOqokJSh/lW7nOT95HsfqF9j8IGuPtz5LxpM9cg6
+// SIG // zQ7zaWgniLln0gGHt0fwtbHLQLdaffXfPmbn8/CExgAs
+// SIG // S55MK7WmrgXTuFFwx77Uz+AKIftW8/pViE96+9MR3zFv
+// SIG // xGDErgBNGBzlwfX+N4lYO65JMW89PuCdUeGCvVf7mxqc
+// SIG // va7bNobOatUdMP9v0ABNtCL/+gc1o6NDFNgBwS+pAJ4+
+// SIG // OUzGA3m9GyHeS1xT7IszDsDICigS03efoYICCzCCAgcG
 // SIG // CSqGSIb3DQEJBjGCAfgwggH0AgEBMHIwXjELMAkGA1UE
 // SIG // BhMCVVMxHTAbBgNVBAoTFFN5bWFudGVjIENvcnBvcmF0
 // SIG // aW9uMTAwLgYDVQQDEydTeW1hbnRlYyBUaW1lIFN0YW1w
 // SIG // aW5nIFNlcnZpY2VzIENBIC0gRzICEA7P9DjI/r81bgTY
 // SIG // apgbGlAwCQYFKw4DAhoFAKBdMBgGCSqGSIb3DQEJAzEL
-// SIG // BgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE0MDIw
-// SIG // NjExMTAyMlowIwYJKoZIhvcNAQkEMRYEFPZ5zo7HM2Ak
-// SIG // yW3nsoU7phPtxJi/MA0GCSqGSIb3DQEBAQUABIIBADkd
-// SIG // zoQQoAzfspsNmB3cnJOU9Z1K6ZP6pg2RC/sOtRN+FqrB
-// SIG // WQlvHzgPWFof8v4B+m9eYU2SPQK+FfWZhG8MtRRk6tVt
-// SIG // PuJsa8JJSpizoW3OIeJ6W5/V8ahSbdP3q3ka33fKsEr7
-// SIG // YP0a+qwqxI+ulnrPEIkG/H78GjuD3DKnon6qIyugD5Jl
-// SIG // iKLi5AW9EF7Smi8/JgkcR0ro5w1WQwbRcb3+GaNTlw1t
-// SIG // ZAuYdz9X5aYIE9mjqZqCILVdBwMccEZoDA6iyS3YS3Fv
-// SIG // k1GiiUEPqS4u6DH6ajcAoQ16nvAc3R+t6iEbfEL/2wBP
-// SIG // 5HQciJDPoJNH9vTH0R7IRWSjbymEBtQ=
+// SIG // BgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MDIw
+// SIG // NjA0NDMxN1owIwYJKoZIhvcNAQkEMRYEFMayzgn7GJaU
+// SIG // pV+dQXeLZq73gFeiMA0GCSqGSIb3DQEBAQUABIIBABiS
+// SIG // c1JttM4EyMIbwUHJGb5OaZ9YsK5JyMpBzbOVxpbHUjt4
+// SIG // X5B/fihavJ20MkSxDVNtxa//APkyT5klqWUWmW9XZfTa
+// SIG // 3on8MhJw7ppNbjFdbGK75wAfimngJmYwGuiUnB9PwXqw
+// SIG // Lp3NYNZHMWMvbi2/yHK51/tkNY9ECGTG/s2+qjyrESai
+// SIG // 5Ho34ncZiJ5SVjzU98gKQbuKTtJma6kcioCCL/jP0GZh
+// SIG // /Q6HRYYTEx9gtRjlduruAN3mg3ES3Hd0GmalXzr+ARZj
+// SIG // 9bRcAKt9FuMwlfh6ChAihkCACn8VLfJ2JY7tOeaPqHG8
+// SIG // Sbs80TkumsAXN+HAUCeWweFw4feJxUo=
 // SIG // End signature block
