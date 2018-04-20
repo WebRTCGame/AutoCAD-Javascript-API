@@ -1,0 +1,1 @@
+Acad.Application.addPalette("Name of palette", "c:/Temp/AJA/capture.html");

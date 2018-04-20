@@ -3984,17 +3984,19 @@ var Autodesk;
                 if (typeof (jsFunc) !== 'function') {
                     throw TypeError("jsFunc should be of type function");
                 }
-
+                unregisterCallback(jsFunc);
                 //syncronously execute the adding of the command, this registers
                 //the command with Autocad. autocad will fire a synchronous event,
                 //identified by globalName when the command is typed
                 var retCode = AutoCAD.EditorInterop.addCommand(groupName, globalName, localName, flags);
+                console.log(retCode);
                 if (retCode != Acad.ErrorStatus.eJsOk) {
-                    throw Error("Error: add command failed.");
+                    //throw Error("Error: add command failed.");
                 }
 
                 //now register a callback with the globalName so that js gets called when the command
                 //is invoked
+                
                 registerCallback(groupName + "." + globalName, jsFunc);
             }
             Editor.addCommand = addCommand;
@@ -6029,10 +6031,12 @@ var Autodesk;
             EditorInterop.executeCommand = executeCommand;
 
             function addCommand(groupName, globalName, localName, flags) {
+                         
                 var jsonStr = exec(JSON.stringify({
                     functionName: 'Ac_EditorInterop.addCommand',
                     functionParams: { groupName: groupName, globalName: globalName, localName: localName, flags: flags }
                 }));
+                
                 var jsonObj = JSON.parse(jsonStr);
 
                 if (jsonObj.retCode == undefined)

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<script type="text/javascript" src="C:\Temp\AJA\Autodesk.AutoCAD.js"></script>
+	<title>Sample App</title>
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css?family=Open+Sans:light">
+		<link rel="stylesheet" href="acadStyle.css">
+	<script>
+		console.clear();
+		console.log(Acad.Editor);
+		function callback() { Acad.Editor.executeCommand("_zoom", "e", " ") };
+		let run = function () {
+			Acad.Editor.addCommand("JSCOMMAND", "customcommand", "customcommand", Acad.CommandFlag.TRANSPARENT, callback);
+		}
+
+	</script>
+</head>
+
+<body>
+
+		
+  <div class="grid-container">
+  
+	<div class="item1">
+	  <div class="clsHeader">Custom Command</div>
+	</div>
+  
+	<div class="item2">
+	  <div class="clsMain">
+		<label class="">something</label>
+		<p>
+  
+		</p>
+		<label class="acadBtn">something else</label>
+		<p>
+  
+		</p>
+		<button class="acadBtn">
+		stuff
+		</button>
+		<input type='button' onclick='window.location.reload()' value='Reload' style="display:inline" />
+	
+	<input type='button' onclick='run()' value="custom command" />
+	<p></p>
+	<label>Click the button then run the command "customcommand"</label>
+	<p>
+	</p>
+	  </div>
+	</div>
+  
+	<div class="item3">
+	  <div class="clsFooter"><a href="https://www.paypal.me/georgeendrulat"><button type="button">Donate</button></a></div>
+  
+	</div>
+  
+  </div>
+	
+</body>
+
+</html>
