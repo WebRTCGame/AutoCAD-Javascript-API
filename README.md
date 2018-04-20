@@ -20,3 +20,5 @@ I'm currently testing this with AutoDesk AutoCAD 2019 / AutoDesk AutoCAD Plant3D
 The capture.html example now works.
 
 If you'd like to debug, click in the new pallet window and hit F12, this'll bring up the chrome inspector for the pallet.
+
+To keep it consistent I've put together a css template to give the visual appearance of a native autocad app and I've started pushing out the webapps into their own fragments which are loaded through an iframe via a url parameter.  They all use the app.html as the wrapper now.
