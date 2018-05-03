@@ -7,11 +7,10 @@
 	<title>Sample App</title>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:light">
 	<link rel="stylesheet" href="acadStyle.css">
-	<style>
-	body {
-		color: #fff;
-	}
-	</style>
+	<script>
+
+		
+	</script>
 </head>
 
 <body>
@@ -20,9 +19,7 @@
 			<div class="clsHeader" id="headerText">Pipe Sizes</div>
 		</div>
 		<div class="item2">
-			<div class="clsMain">
-				<iframe id="fragContainer" src="" frameBorder="0"></iframe>
-			</div>
+				  <iframe id="fragContainer" src="" frameBorder="0"></iframe>
 		</div>
 		<div class="item3">
 			<div class="clsFooter">
@@ -34,15 +31,15 @@
 	</div>
 
 	<script>
-			function getURLParameter(name) {
-				return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
-			}
-			let title = getURLParameter("Title");
-			document.getElementById("headerText").innerHTML = title;
-			let frag = getURLParameter("Frag");
-			document.getElementById('fragContainer').src = frag + ".html";
-	
-		</script>
+		function getURLParameter(name) {
+			return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
+		}
+		let title = getURLParameter("Title");
+		document.getElementById("headerText").innerHTML = title;
+		let frag = getURLParameter("Frag");
+		document.getElementById('fragContainer').src = frag + ".html";
+
+	</script>
 </body>
 
 </html>

@@ -7,18 +7,21 @@
 .item1,
 .item2,
 .item3 {
-  display: flex
+  display: flex;
+  margin:0;
+  text-align: center;
 }
 
 body,
 html,
 iframe {
   margin: 0;
-  height: 100%;
   font-family: "Open Sans", serif;
-  width: 100%;
 }
-
+iframe {
+height:800px;
+width: 100%;
+}
 .clsHeader {
   margin: auto
 }
@@ -33,12 +36,6 @@ iframe {
   margin: 3px;
   border-color: #323232;
   color: #fff
-}
-
-.clsMain {
-  margin: auto;
-  background-color: rgba(100, 100, 100, .2);
-  width: 100%;
 }
 
 .clsFooter {
@@ -58,8 +55,10 @@ iframe {
 
 .item2 {
   grid-area: main;
-  background-color: #5e5e5e;
-  max-height: 800px;
+  
+  width:100%;
+  margin:0;
+  padding: 0;
 }
 
 .item3 {
@@ -84,4 +83,47 @@ iframe {
   grid-template-rows: 0.5fr 4fr 0.5fr;
   color: #fff;
   
+}
+
+.ss-wrapper {
+  overflow: hidden;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+  float: left;
+}
+
+.ss-content {
+  height: 100%;
+  width: 100%;
+  padding: 0 32px 0 0;
+  position: relative;
+  right: -18px;
+  overflow: auto;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.ss-scroll {
+  position: relative;
+  background: rgba(0, 0, 0, .1);
+  width: 3px;
+  border-radius: 4px;
+  top: 0;
+  z-index: 2;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.25s linear;
+}
+
+.ss-container:hover .ss-scroll {
+  opacity: 1;
+}
+
+.ss-grabbed {
+  user-select: none;
+  -o-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
 }
