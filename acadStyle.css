@@ -9,7 +9,10 @@
   border-style: solid;
   border-width: 1px;
 }
-
+.tableTop,
+.tableBottom {
+  height:0;
+}
 body,
 html,
 iframe {
@@ -50,4 +53,12 @@ iframe {
   text-align: center;
 }
 
-
+.tableMain{
+  height:100%;
+  width:100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}

@@ -1,4 +1,4 @@
-let title = "test";
+let title = "Pipe Sizes";
 let Path = "http://127.0.0.1:8080/";
 let Fragment = "pipeSizesFrag";
 let templateFile = "app.html?";
