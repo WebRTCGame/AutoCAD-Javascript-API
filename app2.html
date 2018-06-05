@@ -9,33 +9,26 @@
 	<link rel="stylesheet" href="acadStyle.css">
 	<script>
 
-
+		
 	</script>
 </head>
 
 <body>
-	<table class="tableMain">
-		<tr class="tableMainRow">
-			<th class="tableMaintd">
-				<div class="clsHeader" id="headerText">Pipe Sizes</div>
-			</th>
-		</tr>
-		<tr class="tableMainRow">
-			<td class="tableMaintd">
-				<iframe id="fragContainer" src="" frameBorder="0"></iframe>
-			</td>
-		</tr>
-		<tr class="tableMainRow">
-			<td class="tableMaintd">
-				<div class="clsFooter">
-					<a href="https://www.paypal.me/georgeendrulat">
-						<button type="button" class="acadBtn">Donate</button>
-					</a>
-				</div>
-			</td>
-		</tr>
-	</table>
-
+	<div class="grid-container">
+		<div class="item1">
+			<div class="clsHeader" id="headerText">Pipe Sizes</div>
+		</div>
+		<div class="item2">
+				  <iframe id="fragContainer" src="http://syntheticapp.tech/" frameBorder="0"></iframe>
+		</div>
+		<div class="item3">
+			<div class="clsFooter">
+				<a href="https://www.paypal.me/georgeendrulat">
+					<button type="button">Donate</button>
+				</a>
+			</div>
+		</div>
+	</div>
 
 	<script>
 		function getURLParameter(name) {
@@ -44,7 +37,8 @@
 		let title = getURLParameter("Title");
 		document.getElementById("headerText").innerHTML = title;
 		let frag = getURLParameter("Frag");
-		document.getElementById('fragContainer').src = frag + ".html";
+		//document.getElementById('fragContainer').src = frag;
+
 	</script>
 </body>
 

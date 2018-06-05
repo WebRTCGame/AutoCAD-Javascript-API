@@ -1,0 +1,5 @@
+http://through-the-interface.typepad.com/through_the_interface/2013/05/jigging-an-autocad-circle-from-a-javascript-defined-command.html
+
+https://df-prod.autocad360.com/jsapi/v3/GettingStart/index.html?url=files/tutorial_sysvar_wrkflw.htm,topicNumber=d30e488
+
+https://github.com/WebRTCGame/AutoCAD-Javascript-API

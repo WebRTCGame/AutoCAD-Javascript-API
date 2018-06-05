@@ -1,7 +1,7 @@
 let title = "test";
-let Path = "http://127.0.0.1:8080/";
+let Path = "c:/Temp/AJA/";
 let Fragment = "pipeSizesFrag";
-let templateFile = "app.html?";
+let templateFile = "app2.html?";
 let param1 = "Title="+title;
 let param2 = "&Frag=" + Fragment;
 

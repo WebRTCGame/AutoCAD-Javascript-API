@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+
+
+
+
+
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+
+
+
+
+
+    <style type="text/css">
+        iframe {
+            width: 100%;
+            height: 650px;
+        }
+
+        input {
+            width: 90%;
+        }
+
+        button {
+            width: 5%;
+        }
+
+        th {
+            text-align: left;
+        }
+
+        .ready {
+            color: green;
+        }
+
+        
+    </style>
+
+    <title>iframe browser by gableroux</title>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script type="text/javascript">
+        $(function () {
+
+            $(function () {
+                var counter = 0;
+                var $iframe = $('iframe'); // jQuery iframe
+                var iframe = $('iframe')[0]; // javascript iframe
+
+                // Requires --disable-web-security to work properly
+                $iframe.load(function () {
+                    $('#iframeStatus').html('Ready').addClass('ready');
+                    $('#href').html(iframe.contentWindow.location.href);
+                    $('#href').attr("href", iframe.contentWindow.location.href);
+                    $('#host').html(iframe.contentWindow.location.host);
+                    $('#pathname').html(iframe.contentWindow.location.pathname);
+                    $('#protocol').html(iframe.contentWindow.location.protocol);
+                    $('#pagesLoaded').html(++counter);
+                    console.log("iFrame Loaded");
+                    console.log("Iframe's Window Object:");
+                    console.log(iframe.contentWindow);
+                    console.log("Iframe's Document:");
+                    console.log(iframe.contentDocument);
+                });
+
+                $("#visit").click(function () {
+                    $('#iframeStatus').html('Loading').removeClass('ready');
+                    $('h3').html('Loading url ' + $("#url").val());
+                    $iframe.attr('src', $("#url").val());
+                });
+            });
+
+        });
+
+
+
+
+    </script>
+
+</head>
+
+<body>
+    <h1>iframe Browser</h1>
+    <p>For this example to fully work, you need to launch Chrome with
+        <b>--disable-web-security</b> (sadly, yes). See
+        <a href="http://stackoverflow.com/questions/3102819/chrome-disable-same-origin-policy">chrome-disable-same-origin-policy stack on stackoverflow</a>.</p>
+
+    <input id="url" value="http://www.gableroux.com/"></input>
+    <button type="button" id="visit">Go</button>
+    <div id="status">
+        <h2>Status</h2>
+        <table>
+            <tr>
+                <th>Current Status</th>
+                <td>
+                    <a id="iframeStatus"></a>
+                </td>
+            </tr>
+            <tr>
+                <th>Href</th>
+                <td>
+                    <a id="href"></a>
+                </td>
+            </tr>
+            <tr>
+                <th>Host</th>
+                <td id="host"></td>
+            </tr>
+            <tr>
+                <th>Path Name</th>
+                <td>
+                    <a id="pathname"></a>
+                </td>
+            </tr>
+            <tr>
+                <th>Protocol</th>
+                <td id="protocol"></td>
+            </tr>
+            <tr>
+                <th>Pages Loaded</th>
+                <td id="pagesLoaded"></td>
+            </tr>
+        </table>
+    </div>
+
+    <iframe></iframe>
+    <script>
+        // tell the embed parent frame the height of the content
+        if (window.parent && window.parent.parent) {
+            window.parent.parent.postMessage(["resultsFrame", {
+                height: document.body.getBoundingClientRect().height,
+                slug: "7kgEq"
+            }], "*")
+        }
+    </script>
+
+</body>
+
+</html>
