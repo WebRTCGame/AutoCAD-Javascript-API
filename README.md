@@ -11,6 +11,9 @@ https://df-prod.autocad360.com/jsapi/v3/Autodesk.AutoCAD.js
 
 Getting Started Guide for v3: https://df-prod.autocad360.com/jsapi/v3/GettingStart/index.html?url=files/GUID-140C1DFD-D9CC-4856-8C8D-54B6B3BA8544.htm,topicNumber=d30e415
 
+New version 4 out November 2024:
+https://df-prod.autocad360.com/jsapi/v4/Autodesk.AutoCAD.js
+
 Their old one wasn't working with any examples anymore.
 
 To run any example you need to download and modify the LoadIntoAutoCAD.js file and change the html file path string to your local html file to load.  Then you'll want to webload the LoadIntoAutoCAD.js file.
@@ -22,3 +25,4 @@ The capture.html example now works.
 If you'd like to debug, click in the new pallet window and hit F12, this'll bring up the chrome inspector for the pallet.
 
 To keep it consistent I've put together a css template to give the visual appearance of a native autocad app and I've started pushing out the webapps into their own fragments which are loaded through an iframe via a url parameter.  They all use the app.html as the wrapper now.
+
